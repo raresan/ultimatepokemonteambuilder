@@ -13,7 +13,21 @@ export async function getAllPokemon() {
     return data.results
   } catch (error) {
     console.error(error)
+    throw error
+  }
+}
 
+export async function getTypeDamageRelations(type: string) {
+  try {
+    const response = await fetch(`${BASE_URL}/type/${type.toLowerCase()}`)
+
+    if (!response.ok) throw new Error('Error fetching type data')
+
+    const data = await response.json()
+
+    return data.damage_relations
+  } catch (error) {
+    console.error(error)
     throw error
   }
 }
@@ -24,10 +38,28 @@ export async function getPokemon(name: string) {
 
     if (!response.ok) throw new Error('Error fetching Pokémon data')
 
-    return await response.json()
+    const data = await response.json()
+
+    const types = await Promise.all(
+      data.types.map(async (type: any) => {
+        const damageRelations = await getTypeDamageRelations(type.type.name)
+
+        return {
+          name: type.type.name,
+          damage_relations: damageRelations,
+        }
+      }),
+    )
+
+    return {
+      id: data.id,
+      name: data.name,
+      sprites: data.sprites,
+      stats: data.stats,
+      types,
+    }
   } catch (error) {
     console.error(error)
-
     throw error
   }
 }
