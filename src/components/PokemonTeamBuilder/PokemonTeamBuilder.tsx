@@ -14,8 +14,8 @@ type PokemonData = {
   sprites: {
     other: {
       home: {
-        front_default: string | null
-        front_shiny: string | null
+        front_default: string
+        front_shiny: string
       }
     }
   }
@@ -193,7 +193,7 @@ export default function PokemonTeamBuilder() {
 
   return (
     <div className='min-h-screen bg-gray-900 text-white flex flex-col items-center p-8'>
-      <h1 className='text-3xl font-bold mb-8'>Montador de Time Pokémon</h1>
+      <h1 className='text-3xl font-bold mb-8'>Pokémon Team Builder</h1>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl'>
         {team.map((pokemon, index) => (
