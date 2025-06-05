@@ -4,7 +4,7 @@ import { getAllPokemon, getPokemon } from '@/services/pokeapi'
 import { useEffect, useState } from 'react'
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 
-type PokemonOption = {
+export type PokemonOption = {
   name: string
   url: string
 }
@@ -160,7 +160,7 @@ export default function PokemonTeamBuilder() {
     newTeam[index].data = undefined
 
     const matched = pokemonList.find(
-      (p) => p.name.toLowerCase() === name.toLowerCase(),
+      (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase(),
     )
 
     if (matched) {
@@ -206,7 +206,8 @@ export default function PokemonTeamBuilder() {
             <AutocompleteInput
               value={pokemon.name}
               onChange={(value) => handleNameChange(index, value)}
-              suggestions={pokemonList.map((p) => p.name)}
+              // suggestions={pokemonList.map((p) => p.name)}
+              suggestions={pokemonList}
             />
 
             {pokemon.data && (

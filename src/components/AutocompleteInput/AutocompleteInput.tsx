@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from 'react'
+import type { PokemonOption } from '@/components/PokemonTeamBuilder/PokemonTeamBuilder'
 
 type Props = {
   value: string
   onChange: (value: string) => void
-  suggestions: string[]
+  suggestions: PokemonOption[]
 }
 
 export default function AutocompleteInput({
@@ -16,7 +17,7 @@ export default function AutocompleteInput({
   const [showSuggestions, setShowSuggestions] = useState(false)
 
   const filteredSuggestions = suggestions.filter((suggestion) =>
-    suggestion.toLowerCase().startsWith(value.toLowerCase()),
+    suggestion.name.toLowerCase().startsWith(value.toLowerCase()),
   )
 
   return (
@@ -32,15 +33,28 @@ export default function AutocompleteInput({
 
       {showSuggestions && filteredSuggestions.length > 0 && (
         <ul className='absolute z-10 bg-gray-800 border border-gray-600 rounded w-full max-h-40 overflow-y-auto'>
-          {filteredSuggestions.map((suggestion) => (
-            <li
-              key={suggestion}
-              onClick={() => onChange(suggestion)}
-              className='px-3 py-2 hover:bg-gray-600 cursor-pointer'
-            >
-              {suggestion.charAt(0).toUpperCase() + suggestion.slice(1)}
-            </li>
-          ))}
+          {filteredSuggestions.map((suggestion) => {
+            const id = suggestion.url.split('/').filter(Boolean).pop()
+
+            return (
+              <li
+                key={suggestion.name}
+                onClick={() => onChange(suggestion.name)}
+                className='px-3 py-2 hover:bg-gray-600 cursor-pointer flex items-center gap-4'
+              >
+                <img
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+                  alt={suggestion.name}
+                  className='w-10 h-10'
+                />
+
+                <span>
+                  {suggestion.name.charAt(0).toUpperCase() +
+                    suggestion.name.slice(1)}
+                </span>
+              </li>
+            )
+          })}
         </ul>
       )}
     </div>
