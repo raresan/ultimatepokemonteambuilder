@@ -3,6 +3,9 @@
 import { getAllPokemon, getPokemon } from '@/services/pokeapi'
 import { useEffect, useState } from 'react'
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
+import { TYPE_COLORS } from '@/constants/typeColors'
+import { TERA_TYPES } from '@/constants/teraTypes'
+import TypeInfo from '../TypeInfo/TypeInfo'
 
 export type PokemonOption = {
   name: string
@@ -40,48 +43,6 @@ type PokemonTeamMember = {
   data?: PokemonData
   shiny: boolean
   teraType: string
-}
-
-const TERA_TYPES = [
-  'Normal',
-  'Fire',
-  'Water',
-  'Electric',
-  'Grass',
-  'Ice',
-  'Fighting',
-  'Poison',
-  'Ground',
-  'Flying',
-  'Psychic',
-  'Bug',
-  'Rock',
-  'Ghost',
-  'Dragon',
-  'Dark',
-  'Steel',
-  'Fairy',
-]
-
-const TYPE_COLORS: { [key: string]: string } = {
-  normal: 'bg-gray-400',
-  fire: 'bg-red-500',
-  water: 'bg-blue-500',
-  electric: 'bg-yellow-400',
-  grass: 'bg-green-500',
-  ice: 'bg-blue-200',
-  fighting: 'bg-red-700',
-  poison: 'bg-purple-500',
-  ground: 'bg-yellow-700',
-  flying: 'bg-indigo-300',
-  psychic: 'bg-pink-500',
-  bug: 'bg-green-700',
-  rock: 'bg-yellow-800',
-  ghost: 'bg-indigo-700',
-  dragon: 'bg-indigo-800',
-  dark: 'bg-gray-800',
-  steel: 'bg-gray-500',
-  fairy: 'bg-pink-300',
 }
 
 function calculateDamageMultipliers(types: PokemonData['types']) {
@@ -218,25 +179,7 @@ export default function PokemonTeamBuilder() {
     <div className='min-h-screen bg-gray-900 text-white flex flex-col items-center p-8'>
       <h1 className='text-3xl font-bold mb-8'>Pokémon Team Builder</h1>
 
-      <div className='mb-12 w-full max-w-4xl'>
-        <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses</h2>
-        <div className='grid grid-cols-6 gap-4'>
-          {Object.entries(calculateTeamWeaknesses(team)).map(
-            ([type, count]) => (
-              <div key={type} className='flex flex-col items-center'>
-                <div
-                  className={`w-10 h-10 rounded flex items-center justify-center text-white font-bold text-xs ${
-                    TYPE_COLORS[type] || 'bg-gray-600'
-                  }`}
-                >
-                  {type.toUpperCase()}
-                </div>
-                <div className='mt-1 text-sm'>{count}</div>
-              </div>
-            ),
-          )}
-        </div>
-      </div>
+      <TypeInfo data={calculateTeamWeaknesses(team)} />
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl'>
         {team.map((pokemon, index) => (
@@ -249,7 +192,6 @@ export default function PokemonTeamBuilder() {
             <AutocompleteInput
               value={pokemon.name}
               onChange={(value) => handleNameChange(index, value)}
-              // suggestions={pokemonList.map((p) => p.name)}
               suggestions={pokemonList}
             />
 
@@ -270,11 +212,11 @@ export default function PokemonTeamBuilder() {
                     onClick={() => handleToggleShiny(index)}
                     className={`px-3 py-1 rounded ${
                       pokemon.shiny
-                        ? 'bg-yellow-500'
+                        ? 'bg-yellow-100'
                         : 'bg-gray-600 hover:bg-gray-500'
                     }`}
                   >
-                    {pokemon.shiny ? 'Shiny ✨' : 'Shiny'}
+                    {pokemon.shiny ? '✨' : '✨'}
                   </button>
 
                   <select
@@ -283,6 +225,7 @@ export default function PokemonTeamBuilder() {
                     className='bg-gray-700 rounded px-3 py-1'
                   >
                     <option value=''>Tera Type</option>
+
                     {TERA_TYPES.map((type) => (
                       <option key={type} value={type}>
                         {type}
@@ -308,6 +251,7 @@ export default function PokemonTeamBuilder() {
                   <h3 className='font-semibold mb-2'>
                     Weaknesses / Resistances / Immunities:
                   </h3>
+
                   <div className='grid grid-cols-6 gap-4'>
                     {Object.entries(
                       calculateDamageMultipliers(pokemon.data.types),
@@ -324,6 +268,7 @@ export default function PokemonTeamBuilder() {
                         >
                           {type.toUpperCase()}
                         </div>
+
                         <div className='mt-1 text-sm'>{multiplier}</div>
                       </div>
                     ))}
@@ -334,6 +279,7 @@ export default function PokemonTeamBuilder() {
                   <h3 className='font-semibold mb-1'>
                     EVs gained when defeated:
                   </h3>
+
                   {pokemon.data.stats.filter((s) => s.effort > 0).length ===
                   0 ? (
                     <p>No EVs</p>
