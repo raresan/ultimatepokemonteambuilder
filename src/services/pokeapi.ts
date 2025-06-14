@@ -1,3 +1,5 @@
+import { PokemonData } from '@/types'
+
 const BASE_URL = 'https://pokeapi.co/api/v2'
 
 export async function getAllPokemon() {
@@ -32,7 +34,7 @@ export async function getTypeDamageRelations(type: string) {
   }
 }
 
-export async function getPokemon(name: string) {
+export async function getPokemon(name: string): Promise<PokemonData> {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${name.toLowerCase()}`)
 

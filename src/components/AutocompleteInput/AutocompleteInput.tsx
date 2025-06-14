@@ -1,18 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import type { PokemonOption } from '@/components/PokemonTeamBuilder/PokemonTeamBuilder'
+import type { PokemonOption } from '@/types'
 
 type Props = {
   value: string
-  onChange: (value: string) => void
   suggestions: PokemonOption[]
+  onUpdate: (value: string) => void
 }
 
 export default function AutocompleteInput({
   value,
-  onChange,
   suggestions,
+  onUpdate,
 }: Props) {
   const [showSuggestions, setShowSuggestions] = useState(false)
 
@@ -25,7 +25,7 @@ export default function AutocompleteInput({
       <input
         type='text'
         value={value.charAt(0).toUpperCase() + value.slice(1)}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(event) => onUpdate(event.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
         className='w-full bg-gray-700 rounded px-3 py-2 mt-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -39,7 +39,7 @@ export default function AutocompleteInput({
             return (
               <li
                 key={suggestion.name}
-                onClick={() => onChange(suggestion.name)}
+                onClick={() => onUpdate(suggestion.name)}
                 className='px-3 py-2 hover:bg-gray-600 cursor-pointer flex items-center gap-4'
               >
                 <img
