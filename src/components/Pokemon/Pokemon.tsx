@@ -1,5 +1,4 @@
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
-import { TERA_TYPES } from '@/constants/teraTypes'
 import { TYPE_COLORS } from '@/constants/typeColors'
 import { PokemonData, PokemonOption, PokemonTeamMember } from '@/types'
 import TypeInfo from '@/components/TypeInfo/TypeInfo'
@@ -19,7 +18,6 @@ export default function Pokemon({
   onUpdate,
 }: PokemonProps) {
   const [shiny, setShiny] = useState<boolean>(false)
-  const [teraType, setTeraType] = useState<string>('')
   const [pokemonData, setPokemonData] = useState<PokemonData>()
   const [pokemonNameSearch, setPokemonNameSearch] = useState<string>(
     pokemonData?.name || '',
@@ -30,11 +28,10 @@ export default function Pokemon({
     const updatedPokemon = {
       data: pokemonData,
       shiny,
-      teraType,
     }
 
     onUpdate(updatedPokemon, index)
-  }, [pokemonData, shiny, teraType])
+  }, [pokemonData, shiny])
 
   const fetchPokemon = async (name: string) => {
     try {
@@ -97,20 +94,6 @@ export default function Pokemon({
             >
               {shiny ? '✨' : '✨'}
             </button>
-
-            <select
-              value={teraType}
-              onChange={(event) => setTeraType(event.target.value)}
-              className='bg-gray-700 rounded px-3 py-1'
-            >
-              <option value=''>Tera Type</option>
-
-              {TERA_TYPES.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className='flex gap-2 mt-2'>

@@ -13,7 +13,6 @@ export default function PokemonTeamBuilder() {
   const [team, setTeam] = useState<PokemonTeamMember[]>(
     Array.from({ length: 6 }, () => ({
       shiny: false,
-      teraType: '',
       data: undefined,
     })),
   )

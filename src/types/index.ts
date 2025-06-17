@@ -33,5 +33,4 @@ export type PokemonData = {
 export type PokemonTeamMember = {
   data?: PokemonData
   shiny: boolean
-  teraType: string
 }
