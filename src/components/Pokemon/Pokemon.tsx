@@ -1,7 +1,7 @@
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 import { TYPE_COLORS } from '@/constants/typeColors'
 import { PokemonData, PokemonOption, PokemonTeamMember } from '@/types'
-import TypeInfo from '@/components/TypeInfo/TypeInfo'
+import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
 import { useEffect, useState } from 'react'
 import { getPokemon } from '@/services/pokeapi'
@@ -114,7 +114,9 @@ export default function Pokemon({
               Weaknesses / Resistances / Immunities:
             </h3>
 
-            <TypeInfo data={calculateDamageMultipliers(pokemonData.types)} />
+            <TypeRelations
+              data={calculateDamageMultipliers(pokemonData.types)}
+            />
           </div>
 
           <div className='mt-4 text-sm text-gray-300'>

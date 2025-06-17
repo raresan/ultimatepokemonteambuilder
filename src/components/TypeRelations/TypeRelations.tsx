@@ -1,10 +1,10 @@
 import { TYPE_COLORS } from '@/constants/typeColors'
 
-type TypeInfoProps = {
+type TypeRelationsProps = {
   data: { [type: string]: number }
 }
 
-export default function TypeInfo({ data }: TypeInfoProps) {
+export default function TypeRelations({ data }: TypeRelationsProps) {
   return (
     <div className='grid grid-cols-6 gap-4'>
       {Object.entries(data).map(([type, value]) => (
