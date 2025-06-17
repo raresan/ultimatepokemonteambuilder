@@ -1,12 +1,11 @@
-import { TYPE_COLORS } from '@/constants/typeColors'
+import { ALL_TYPES } from '@/constants/allTypes'
 import { calculateDamageMultipliers } from './calculateDamageMultipliers'
 import { PokemonTeamMember } from '@/types'
 
 export function calculateTeamWeaknesses(team: PokemonTeamMember[]) {
-  const allTypes = Object.keys(TYPE_COLORS)
   const weaknessCount: { [type: string]: number } = {}
 
-  allTypes.forEach((type) => {
+  ALL_TYPES.forEach((type) => {
     weaknessCount[type] = 0
   })
 
@@ -15,7 +14,7 @@ export function calculateTeamWeaknesses(team: PokemonTeamMember[]) {
 
     const multipliers = calculateDamageMultipliers(member.data.types)
 
-    allTypes.forEach((type) => {
+    ALL_TYPES.forEach((type) => {
       if (multipliers[type] > 1) {
         weaknessCount[type] += 1
       }

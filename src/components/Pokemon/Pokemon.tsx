@@ -1,10 +1,10 @@
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
-import { TYPE_COLORS } from '@/constants/typeColors'
 import { PokemonData, PokemonOption, PokemonTeamMember } from '@/types'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
 import { useEffect, useState } from 'react'
 import { getPokemon } from '@/services/pokeapi'
+import Image from 'next/image'
 
 type PokemonProps = {
   index: number
@@ -98,14 +98,13 @@ export default function Pokemon({
 
           <div className='flex gap-2 mt-2'>
             {pokemonData.types.map((type) => (
-              <span
+              <Image
                 key={type.name}
-                className={`px-2 py-1 rounded text-white text-sm ${
-                  TYPE_COLORS[type.name] || 'bg-gray-500'
-                }`}
-              >
-                {type.name.toUpperCase()}
-              </span>
+                src={`/assets/images/${type.name}.png`}
+                alt={type.name}
+                width={100}
+                height={100}
+              />
             ))}
           </div>
 

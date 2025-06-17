@@ -1,12 +1,10 @@
-import { TYPE_COLORS } from '@/constants/typeColors'
+import { ALL_TYPES } from '@/constants/allTypes'
 import { PokemonData } from '@/types'
 
 export function calculateDamageMultipliers(types: PokemonData['types']) {
-  const allTypes = Object.keys(TYPE_COLORS)
-
   const multipliers: { [key: string]: number } = {}
 
-  allTypes.forEach((type) => {
+  ALL_TYPES.forEach((type) => {
     multipliers[type] = 1
   })
 
