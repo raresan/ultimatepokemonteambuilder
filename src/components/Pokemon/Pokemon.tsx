@@ -2,7 +2,7 @@ import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 import { PokemonData, PokemonOption, PokemonTeamMember } from '@/types'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { getPokemon } from '@/services/pokeapi'
 import Image from 'next/image'
 
@@ -32,6 +32,23 @@ export default function Pokemon({
 
     onUpdate(updatedPokemon, index)
   }, [pokemonData, shiny])
+
+  useEffect(() => {
+    if (!pokemonData) return
+
+    // audio.current.src = pokemonData.cries.latest || pokemonData.cries.legacy
+    // audio.current.play()
+    playAudio()
+  }, [pokemonData])
+
+  const audio = useRef<HTMLAudioElement>(new Audio())
+
+  const playAudio = () => {
+    if (!pokemonData) return
+
+    audio.current.src = pokemonData.cries.latest || pokemonData.cries.legacy
+    audio.current.play()
+  }
 
   const fetchPokemon = async (name: string) => {
     try {
@@ -92,7 +109,16 @@ export default function Pokemon({
                 shiny ? 'bg-yellow-100' : 'bg-gray-600 hover:bg-gray-500'
               }`}
             >
-              {shiny ? '✨' : '✨'}
+              ✨
+            </button>
+
+            <button
+              onClick={playAudio}
+              className={
+                'px-3 py-1 rounded bg-gray-600 hover:bg-gray-500 active:bg-gray-700'
+              }
+            >
+              🔊
             </button>
           </div>
 

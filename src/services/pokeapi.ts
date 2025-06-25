@@ -59,6 +59,7 @@ export async function getPokemon(name: string): Promise<PokemonData> {
       sprites: data.sprites,
       stats: data.stats,
       types,
+      cries: data.cries,
     }
   } catch (error) {
     console.error(error)

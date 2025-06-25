@@ -28,6 +28,10 @@ export type PokemonData = {
       no_damage_from: { name: string }[]
     }
   }[]
+  cries: {
+    latest: string
+    legacy: string
+  }
 }
 
 export type PokemonTeamMember = {
