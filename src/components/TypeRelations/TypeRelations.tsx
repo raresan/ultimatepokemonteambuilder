@@ -2,21 +2,32 @@ import Image from 'next/image'
 
 type TypeRelationsProps = {
   data: { [type: string]: number }
+  isPokemon?: boolean
 }
 
-export default function TypeRelations({ data }: TypeRelationsProps) {
-  return (
-    <div className='grid grid-cols-6 gap-4'>
-      {Object.entries(data).map(([type, value]) => (
-        <div key={type} className='flex flex-col items-center'>
-          <Image
-            src={`/assets/images/${type}.png`}
-            alt={type}
-            width={100}
-            height={100}
-          />
+export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
+  const formatMultiplier = (multiplier: number) => {
+    return multiplier === 0 ? '-' : `${multiplier}x`
+  }
 
-          <div className='mt-1 text-sm'>{value}</div>
+  return (
+    <div className={`grid grid-cols-${isPokemon ? 3 : 6} gap-2`}>
+      {Object.entries(data).map(([type, value]) => (
+        <div key={type} className=''>
+          <div className='flex items-center bg-black gap-2 rounded-full pr-3'>
+            <div className='relative shrink-0'>
+              <Image
+                src={`/assets/images/${type}.png`}
+                alt={type}
+                width={80}
+                height={80}
+              />
+            </div>
+
+            <span className='text-white grow-1 text-center text-[0.7rem] font-medium'>
+              {isPokemon ? formatMultiplier(value) : value}
+            </span>
+          </div>
         </div>
       ))}
     </div>

@@ -82,7 +82,7 @@ export default function AutocompleteInput({
       />
 
       {showSuggestions && filteredSuggestionsWithImage.length > 0 && (
-        <ul className='absolute z-10 bg-gray-800 border border-gray-600 rounded w-full max-h-40 overflow-y-auto'>
+        <ul className='absolute z-10 bg-gray-800 border border-gray-600 rounded w-full max-h-80 overflow-y-auto'>
           {filteredSuggestionsWithImage.map((suggestion) => {
             const id = suggestion.url.split('/').filter(Boolean).pop()
             return (

@@ -4,6 +4,7 @@ import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
 import { useEffect, useRef, useState } from 'react'
 import { getPokemon } from '@/services/pokeapi'
+import { getBorderColors } from '@/utils/getBorderColors'
 import Image from 'next/image'
 
 type PokemonProps = {
@@ -36,8 +37,6 @@ export default function Pokemon({
   useEffect(() => {
     if (!pokemonData) return
 
-    // audio.current.src = pokemonData.cries.latest || pokemonData.cries.legacy
-    // audio.current.play()
     playAudio()
   }, [pokemonData])
 
@@ -47,6 +46,7 @@ export default function Pokemon({
     if (!pokemonData) return
 
     audio.current.src = pokemonData.cries.latest || pokemonData.cries.legacy
+    audio.current.volume = 0.2
     audio.current.play()
   }
 
@@ -79,8 +79,9 @@ export default function Pokemon({
     <div
       key={index}
       className='bg-gray-800 rounded-lg p-4 border border-gray-700'
+      style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
-      <label className='font-semibold'>Pokémon {index + 1}</label>
+      <label className='font-semibold'>#{index + 1} Pokémon</label>
 
       <AutocompleteInput
         value={pokemonNameSearch}
@@ -92,6 +93,18 @@ export default function Pokemon({
 
       {pokemonData && (
         <div className='mt-4 flex flex-col items-center'>
+          <div className='flex gap-2 mb-2'>
+            {pokemonData.types.map((type) => (
+              <Image
+                key={type.name}
+                src={`/assets/images/${type.name}.png`}
+                alt={type.name}
+                width={100}
+                height={100}
+              />
+            ))}
+          </div>
+
           <img
             src={
               shiny
@@ -99,7 +112,7 @@ export default function Pokemon({
                 : pokemonData.sprites.other.home.front_default
             }
             alt={pokemonData.name}
-            className='w-24 h-24'
+            className='w-50 h-50'
           />
 
           <div className='flex gap-4 mt-4'>
@@ -122,18 +135,6 @@ export default function Pokemon({
             </button>
           </div>
 
-          <div className='flex gap-2 mt-2'>
-            {pokemonData.types.map((type) => (
-              <Image
-                key={type.name}
-                src={`/assets/images/${type.name}.png`}
-                alt={type.name}
-                width={100}
-                height={100}
-              />
-            ))}
-          </div>
-
           <div className='mt-6 w-full max-w-sm'>
             <h3 className='font-semibold mb-2'>
               Weaknesses / Resistances / Immunities:
@@ -141,6 +142,7 @@ export default function Pokemon({
 
             <TypeRelations
               data={calculateDamageMultipliers(pokemonData.types)}
+              isPokemon
             />
           </div>
 
