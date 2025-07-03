@@ -71,7 +71,7 @@ export default function TeamBuilder() {
         </button>
       )}
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 w-full max-w-7xl'>
         {team.map((teamMember, index) => (
           <Pokemon
             key={index}
@@ -82,7 +82,7 @@ export default function TeamBuilder() {
         ))}
       </div>
 
-      <div className='mt-12 w-full max-w-4xl'>
+      <div className='mt-12 w-full max-w-7xl'>
         <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
 
         <TypeRelations data={calculateTeamWeaknesses(team)} />
