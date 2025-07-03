@@ -7,7 +7,7 @@ type TypeRelationsProps = {
 
 export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   const formatMultiplier = (multiplier: number) => {
-    return multiplier === 0 ? '-' : `${multiplier}x`
+    return multiplier === 0 ? '-' : `*${multiplier}`
   }
 
   return (
