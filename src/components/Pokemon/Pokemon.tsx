@@ -75,12 +75,30 @@ export default function Pokemon({
     }
   }
 
+  const handleClear = () => {
+    setPokemonData(undefined)
+    setPokemonNameSearch('')
+    setShiny(false)
+
+    onUpdate({ data: undefined, shiny: false }, index)
+  }
+
   return (
     <div
       key={index}
-      className='bg-gray-800 rounded-lg p-4 border border-gray-700'
+      className='relative bg-gray-800 rounded-lg p-4 border border-gray-700'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
+      {pokemonData && (
+        <button
+          onClick={handleClear}
+          className='absolute top-2 right-2 text-gray-400 hover:text-white text-xl font-bold'
+          aria-label='Remove Pokémon'
+        >
+          ×
+        </button>
+      )}
+
       <label className='font-semibold'>#{index + 1} Pokémon</label>
 
       <AutocompleteInput
