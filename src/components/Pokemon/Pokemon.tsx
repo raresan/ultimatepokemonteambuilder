@@ -91,7 +91,7 @@ export default function Pokemon({
 
       {error && <div className='p-4 text-red-500'>Error: {error}</div>}
 
-      {pokemonData && (
+      {pokemonData ? (
         <div className='mt-4 flex flex-col items-center'>
           <div className='flex gap-2 mb-2'>
             {pokemonData.types.map((type) => (
@@ -105,14 +105,15 @@ export default function Pokemon({
             ))}
           </div>
 
-          <img
+          <Image
             src={
               shiny
                 ? pokemonData.sprites.other.home.front_shiny
                 : pokemonData.sprites.other.home.front_default
             }
             alt={pokemonData.name}
-            className='w-50 h-50'
+            width={200}
+            height={200}
           />
 
           <div className='flex gap-4 mt-4'>
@@ -168,6 +169,15 @@ export default function Pokemon({
               </ul>
             )}
           </div>
+        </div>
+      ) : (
+        <div className='flex-1 flex items-center justify-center min-h-[450px]'>
+          <Image
+            src={'/assets/images/pokeball.png'}
+            alt={'Pokéball'}
+            width={100}
+            height={100}
+          />
         </div>
       )}
     </div>

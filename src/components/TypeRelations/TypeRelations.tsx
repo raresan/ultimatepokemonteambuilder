@@ -11,7 +11,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   }
 
   return (
-    <div className={`grid grid-cols-${isPokemon ? 3 : 6} gap-2`}>
+    <div className={`grid ${isPokemon ? 'grid-cols-3' : 'grid-cols-6'} gap-2`}>
       {Object.entries(data).map(([type, value]) => (
         <div key={type} className=''>
           <div className='flex items-center bg-black gap-2 rounded-full pr-3'>
