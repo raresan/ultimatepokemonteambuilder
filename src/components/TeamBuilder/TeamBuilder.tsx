@@ -44,6 +44,15 @@ export default function TeamBuilder() {
     setTeam(updatedTeam)
   }
 
+  const handleClear = () => {
+    setTeam(
+      Array.from({ length: 6 }, () => ({
+        shiny: false,
+        data: undefined,
+      })),
+    )
+  }
+
   if (loading) return <div className='p-4'>Loading...</div>
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
 
@@ -53,11 +62,14 @@ export default function TeamBuilder() {
         Pokémon Team Builder / EVs earned
       </h1>
 
-      <div className='mb-12 w-full max-w-4xl'>
-        <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
-
-        <TypeRelations data={calculateTeamWeaknesses(team)} />
-      </div>
+      {team && (
+        <button
+          onClick={handleClear}
+          className='mb-8 px-4 py-2 rounded bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors duration-200 font-semibold text-white shadow-md'
+        >
+          🧹 Reset Team
+        </button>
+      )}
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl'>
         {team.map((teamMember, index) => (
@@ -68,6 +80,12 @@ export default function TeamBuilder() {
             onUpdate={updateTeam}
           />
         ))}
+      </div>
+
+      <div className='mt-12 w-full max-w-4xl'>
+        <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
+
+        <TypeRelations data={calculateTeamWeaknesses(team)} />
       </div>
     </div>
   )
