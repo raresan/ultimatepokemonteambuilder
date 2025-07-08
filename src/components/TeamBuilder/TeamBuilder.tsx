@@ -62,14 +62,28 @@ export default function TeamBuilder() {
         Pokémon Team Builder / EVs earned
       </h1>
 
-      {team && (
+      <div className='text-center mb-8'>
+        <p>
+          Choose six Pokémon for your team. You can see their individual
+          weaknesses, resistances and immunities.
+        </p>
+
+        <p>
+          Also, you can check which EVs (Effort Values) they grant when
+          defeated, in case you need.
+        </p>
+
+        <p>At the end, you can see how many of them are weak to each type.</p>
+      </div>
+
+      {/* {team && (
         <button
           onClick={handleClear}
           className='mb-8 px-4 py-2 rounded bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors duration-200 font-semibold text-white shadow-md'
         >
           🧹 Reset Team
         </button>
-      )}
+      )} */}
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 w-full max-w-7xl'>
         {team.map((teamMember, index) => (
@@ -84,6 +98,11 @@ export default function TeamBuilder() {
 
       <div className='mt-12 w-full max-w-7xl'>
         <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
+
+        <p className='mb-4'>
+          Below, find how many Pokémon from your selected team are weak to each
+          type.
+        </p>
 
         <TypeRelations data={calculateTeamWeaknesses(team)} />
       </div>
