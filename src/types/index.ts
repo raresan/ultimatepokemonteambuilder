@@ -2,6 +2,7 @@ export type PokemonOption = {
   name: string
   url: string
   formattedName: string
+  imgUrl: string
 }
 
 export type PokemonData = {
