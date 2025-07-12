@@ -1,6 +1,7 @@
 export type PokemonOption = {
   name: string
   url: string
+  formattedName: string
 }
 
 export type PokemonData = {

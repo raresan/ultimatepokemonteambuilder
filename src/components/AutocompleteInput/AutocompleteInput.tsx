@@ -6,7 +6,8 @@ import type { PokemonOption } from '@/types'
 type Props = {
   value: string
   suggestions: PokemonOption[]
-  onUpdate: (value: string) => void
+  onTypeName: (name: string) => void
+  onClickName: (pokemonInfo: PokemonOption) => void
 }
 
 const imageExistenceCache = new Map<string, boolean>()
@@ -35,7 +36,8 @@ const checkImageExists = (url: string): Promise<boolean> => {
 export default function AutocompleteInput({
   value,
   suggestions,
-  onUpdate,
+  onTypeName,
+  onClickName,
 }: Props) {
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [filteredSuggestionsWithImage, setFilteredSuggestionsWithImage] =
@@ -43,7 +45,11 @@ export default function AutocompleteInput({
 
   const filteredSuggestions = useMemo(() => {
     return suggestions.filter((suggestion) =>
-      suggestion.name.toLowerCase().startsWith(value.toLowerCase()),
+      // suggestion.name.toLowerCase().startsWith(value.toLowerCase()),
+      suggestion.name
+        .toLowerCase()
+        .replaceAll('-', ' ')
+        .includes(value.toLowerCase()),
     )
   }, [value, suggestions])
 
@@ -74,8 +80,8 @@ export default function AutocompleteInput({
     <div className='relative'>
       <input
         type='text'
-        value={value.charAt(0).toUpperCase() + value.slice(1)}
-        onChange={(event) => onUpdate(event.target.value)}
+        value={value}
+        onChange={(event) => onTypeName(event.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onBlur={() => setShowSuggestions(false)}
         className='w-full bg-gray-700 rounded px-3 py-2 mt-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
@@ -89,17 +95,14 @@ export default function AutocompleteInput({
               <li
                 key={suggestion.name}
                 className='px-3 py-2 hover:bg-gray-600 cursor-pointer flex items-center gap-4'
-                onPointerDown={() => onUpdate(suggestion.name)}
+                onPointerDown={() => onClickName(suggestion)}
               >
                 <img
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${id}.png`}
                   alt={suggestion.name}
                   className='w-10 h-10'
                 />
-                <span>
-                  {suggestion.name.charAt(0).toUpperCase() +
-                    suggestion.name.slice(1)}
-                </span>
+                <span>{suggestion.formattedName}</span>
               </li>
             )
           })}

@@ -59,11 +59,16 @@ export default function Pokemon({
     }
   }
 
-  const onUpdateName = async (name: string) => {
+  const onTypeName = async (name: string) => {
     setPokemonNameSearch(name)
+  }
+
+  const onClickName = async (pokemonInfo: PokemonOption) => {
+    setPokemonNameSearch(pokemonInfo.formattedName)
 
     const matched = pokemonList.find(
-      (pokemon) => pokemon.name.toLowerCase() === name.toLowerCase(),
+      (pokemon) =>
+        pokemon.name.toLowerCase() === pokemonInfo.name.toLowerCase(),
     )
 
     if (matched) {
@@ -104,7 +109,8 @@ export default function Pokemon({
       <AutocompleteInput
         value={pokemonNameSearch}
         suggestions={pokemonList}
-        onUpdate={onUpdateName}
+        onTypeName={onTypeName}
+        onClickName={onClickName}
       />
 
       {error && <div className='p-4 text-red-500'>Error: {error}</div>}
