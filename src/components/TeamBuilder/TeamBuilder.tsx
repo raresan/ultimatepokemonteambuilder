@@ -106,7 +106,7 @@ export default function TeamBuilder() {
       {/* {team && (
         <button
           onClick={handleClear}
-          className='mb-8 px-4 py-2 rounded bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors duration-200 font-semibold text-white shadow-md'
+          className='mb-8 px-4 py-2 rounded bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors duration-200 font-bold text-white shadow-md'
         >
           🧹 Reset Team
         </button>

@@ -104,7 +104,7 @@ export default function Pokemon({
         </button>
       )}
 
-      <label className='font-semibold'>#{index + 1} Pokémon</label>
+      <label className='font-bold'>#{index + 1} Pokémon</label>
 
       <AutocompleteInput
         value={pokemonNameSearch}
@@ -161,7 +161,7 @@ export default function Pokemon({
           </div>
 
           <div className='mt-6 w-full max-w-sm'>
-            <h3 className='font-semibold mb-2'>
+            <h3 className='font-bold mb-2'>
               Weaknesses / Resistances / Immunities:
             </h3>
 
@@ -172,7 +172,7 @@ export default function Pokemon({
           </div>
 
           <div className='mt-4 text-sm text-gray-300'>
-            <h3 className='font-semibold mb-1'>EVs gained when defeated:</h3>
+            <h3 className='font-bold mb-1'>EVs gained when defeated:</h3>
 
             {pokemonData.stats.filter((s) => s.effort > 0).length === 0 ? (
               <p>No EVs</p>

@@ -24,7 +24,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
               />
             </div>
 
-            <span className='text-white grow-1 text-center text-[0.7rem] font-medium'>
+            <span className='text-white grow-1 text-center text-[0.7rem]'>
               {isPokemon ? formatMultiplier(value) : value}
             </span>
           </div>
