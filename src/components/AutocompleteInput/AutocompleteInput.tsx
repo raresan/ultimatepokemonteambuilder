@@ -56,15 +56,15 @@ export default function AutocompleteInput({
         onChange={(e) => onTypeName(e.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onBlur={() => setShowSuggestions(false)}
-        className='w-full bg-gray-700 rounded px-3 py-2 mt-2 mb-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
+        className='w-full bg-background rounded px-3 py-2 mt-2 mb-2 focus:outline-none focus:ring-2 focus:ring-foreground'
       />
 
       {showSuggestions && suggestionsWithImages.length > 0 && (
-        <ul className='absolute z-10 bg-gray-800 border border-gray-600 rounded w-full max-h-80 overflow-y-auto'>
+        <ul className='absolute z-10 bg-background border border-darkrai rounded w-full max-h-80 overflow-y-auto'>
           {suggestionsWithImages.map((suggestion) => (
             <li
               key={suggestion.name}
-              className='px-3 py-2 hover:bg-gray-600 cursor-pointer flex items-center gap-4'
+              className='px-3 py-2 hover:bg-darkrai cursor-pointer flex items-center gap-4'
               onPointerDown={() => onClickName(suggestion)}
             >
               <Image

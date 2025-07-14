@@ -91,13 +91,13 @@ export default function Pokemon({
   return (
     <div
       key={index}
-      className='relative bg-gray-800 rounded-lg p-4 border border-gray-700'
+      className='relative rounded-lg p-4 border bg-zekrom border-darkrai'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       {pokemonData && (
         <button
           onClick={handleClear}
-          className='absolute top-2 right-2 text-gray-400 hover:text-white text-xl font-bold'
+          className='absolute top-2 right-2 hover:text-white text-xl font-bold'
           aria-label='Remove Pokémon'
         >
           ×
@@ -144,7 +144,7 @@ export default function Pokemon({
             <button
               onClick={() => setShiny((previous) => !previous)}
               className={`px-3 py-1 rounded ${
-                shiny ? 'bg-yellow-100' : 'bg-gray-600 hover:bg-gray-500'
+                shiny ? 'bg-foreground' : 'bg-background hover:bg-darkrai'
               }`}
             >
               ✨
@@ -153,7 +153,7 @@ export default function Pokemon({
             <button
               onClick={playAudio}
               className={
-                'px-3 py-1 rounded bg-gray-600 hover:bg-gray-500 active:bg-gray-700'
+                'px-3 py-1 rounded bg-background hover:bg-darkrai active:bg-foreground'
               }
             >
               🔊

@@ -84,7 +84,7 @@ export default function TeamBuilder() {
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
 
   return (
-    <div className='min-h-screen bg-gray-900 text-white flex flex-col items-center p-8'>
+    <div className='min-h-screen flex flex-col items-center p-8'>
       <h1 className='text-3xl font-bold mb-8'>
         Pokémon Team Builder / EVs earned
       </h1>

@@ -14,7 +14,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
     <div className={`grid ${isPokemon ? 'grid-cols-3' : 'grid-cols-6'} gap-2`}>
       {Object.entries(data).map(([type, value]) => (
         <div key={type} className=''>
-          <div className='flex items-center bg-black gap-2 rounded-full pr-3'>
+          <div className='flex items-center bg-darkrai gap-2 rounded-full pr-3'>
             <div className='relative shrink-0'>
               <Image
                 src={`/assets/images/${type}.png`}
@@ -24,7 +24,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
               />
             </div>
 
-            <span className='text-white grow-1 text-center text-[0.7rem]'>
+            <span className='grow-1 text-center text-[0.7rem]'>
               {isPokemon ? formatMultiplier(value) : value}
             </span>
           </div>

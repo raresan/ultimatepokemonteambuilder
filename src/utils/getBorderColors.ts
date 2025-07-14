@@ -13,7 +13,7 @@ export const getBorderColors = (types: { name: string }[]) => {
   return {
     border: '4px solid transparent',
     backgroundImage: `
-      linear-gradient(#1f2937, #1f2937),
+      linear-gradient(var(--zekrom), var(--zekrom)),
       linear-gradient(90deg, ${color1} 50%, ${color2} 50%)
     `,
     backgroundOrigin: 'border-box',
