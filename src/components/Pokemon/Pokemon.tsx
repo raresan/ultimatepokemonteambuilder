@@ -37,16 +37,22 @@ export default function Pokemon({
   useEffect(() => {
     if (!pokemonData) return
 
-    playAudio()
+    playAudio(pokemonData.cries.latest || pokemonData.cries.legacy, 0.1)
   }, [pokemonData])
+
+  useEffect(() => {
+    if (shiny) {
+      playAudio('/assets/audio/shiny.mp3', 0.5)
+    }
+  }, [shiny])
 
   const audio = useRef<HTMLAudioElement>(new Audio())
 
-  const playAudio = () => {
+  const playAudio = (src: string, volume: number) => {
     if (!pokemonData) return
 
-    audio.current.src = pokemonData.cries.latest || pokemonData.cries.legacy
-    audio.current.volume = 0.2
+    audio.current.src = src
+    audio.current.volume = volume
     audio.current.play()
   }
 
@@ -164,7 +170,12 @@ export default function Pokemon({
             </button>
 
             <button
-              onClick={playAudio}
+              onClick={() =>
+                playAudio(
+                  pokemonData.cries.latest || pokemonData.cries.legacy,
+                  0.1,
+                )
+              }
               className={
                 'px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai active:bg-foreground'
               }
