@@ -181,13 +181,11 @@ export default function Pokemon({
                 {pokemonData.stats
                   .filter((stat) => stat.effort > 0)
                   .map((stat) => (
-                    <li key={stat.stat.name} className='bg-darkrai px-4 py-2'>
-                      {stat.effort}{' '}
-                      {stat.stat.name
-                        .replace('-', ' ')
-                        .replace('special', 'Sp.')
-                        .replace('attack', 'Attack')
-                        .replace('defense', 'Defense')}
+                    <li
+                      key={stat.stat.name}
+                      className='px-6 py-2 rounded bg-darkrai capitalize'
+                    >
+                      {stat.effort} {stat.stat.name.replace('-', ' ')}
                     </li>
                   ))}
               </ul>
