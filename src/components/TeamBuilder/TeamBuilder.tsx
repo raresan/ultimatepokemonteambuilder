@@ -6,6 +6,7 @@ import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import Pokemon from '@/components/Pokemon/Pokemon'
 import { PokemonOption, PokemonTeamMember } from '@/types'
 import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
+import Image from 'next/image'
 
 const formatPokemonList = (allPokemon: PokemonOption[]) => {
   const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {
@@ -85,9 +86,14 @@ export default function TeamBuilder() {
 
   return (
     <div className='min-h-screen flex flex-col items-center p-8'>
-      <h1 className='text-3xl font-bold mb-8'>
-        Pokémon Team Builder / EVs earned
-      </h1>
+      <Image
+        src={'/assets/images/pokemon-logo.png'}
+        alt={'Pokémon Logo'}
+        width={450}
+        height={150}
+      />
+
+      <h1 className='text-3xl font-bold mb-8'>Team Builder / EVs earned</h1>
 
       <div className='text-center mb-8'>
         <p>
