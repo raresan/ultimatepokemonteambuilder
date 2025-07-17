@@ -97,7 +97,7 @@ export default function Pokemon({
       {pokemonData && (
         <button
           onClick={handleClear}
-          className='absolute top-2 right-2 hover:text-white text-xl font-bold'
+          className='absolute top-2 right-4 hover:text-red-500 text-xl font-bold'
           aria-label='Remove Pokémon'
         >
           ×
@@ -171,23 +171,23 @@ export default function Pokemon({
             />
           </div>
 
-          <div className='mt-4 text-sm text-gray-300'>
-            <h3 className='font-bold mb-1'>EVs gained when defeated:</h3>
+          <div className='mt-6 w-full max-w-sm'>
+            <h3 className='font-bold mb-2'>Effort Values Earned:</h3>
 
             {pokemonData.stats.filter((s) => s.effort > 0).length === 0 ? (
-              <p>No EVs</p>
+              <div className='p-4 text-red-500'>No EVs</div>
             ) : (
-              <ul className='list-disc list-inside'>
+              <ul className='flex justify-center gap-2'>
                 {pokemonData.stats
                   .filter((stat) => stat.effort > 0)
                   .map((stat) => (
-                    <li key={stat.stat.name}>
-                      {stat.effort} em{' '}
+                    <li key={stat.stat.name} className='bg-darkrai px-4 py-2'>
+                      {stat.effort}{' '}
                       {stat.stat.name
                         .replace('-', ' ')
                         .replace('special', 'Sp.')
-                        .replace('attack', 'Atk')
-                        .replace('defense', 'Def')}
+                        .replace('attack', 'Attack')
+                        .replace('defense', 'Defense')}
                     </li>
                   ))}
               </ul>
