@@ -19,6 +19,8 @@ export default function Pokemon({
   onUpdate,
 }: PokemonProps) {
   const [shiny, setShiny] = useState<boolean>(false)
+  const [hasAnimatedShiny, setHasAnimatedShiny] = useState<boolean>(false)
+
   const [pokemonData, setPokemonData] = useState<PokemonData>()
   const [pokemonNameSearch, setPokemonNameSearch] = useState<string>(
     pokemonData?.name || '',
@@ -44,6 +46,10 @@ export default function Pokemon({
     if (shiny) {
       playAudio('/assets/audio/shiny.mp3', 0.5)
     }
+
+    setTimeout(() => {
+      setHasAnimatedShiny(shiny)
+    }, 1000)
   }, [shiny])
 
   const audio = useRef<HTMLAudioElement>(new Audio())
@@ -148,16 +154,28 @@ export default function Pokemon({
             ))}
           </div>
 
-          <Image
-            src={
-              shiny
-                ? pokemonData.sprites.other.home.front_shiny
-                : pokemonData.sprites.other.home.front_default
-            }
-            alt={pokemonData.name}
-            width={200}
-            height={200}
-          />
+          <div className='relative w-[200px] h-[200px]'>
+            <img
+              src={`/assets/gif/shiny.gif?t=${
+                shiny && !hasAnimatedShiny ? Date.now() : undefined
+              }`}
+              alt='Shiny Sparkles'
+              className='absolute inset-0 z-10 pointer-events-none'
+              style={{ display: shiny && !hasAnimatedShiny ? 'block' : 'none' }}
+            />
+
+            <Image
+              src={
+                shiny
+                  ? pokemonData.sprites.other.home.front_shiny
+                  : pokemonData.sprites.other.home.front_default
+              }
+              alt={pokemonData.name}
+              width={200}
+              height={200}
+              className='relative z-0'
+            />
+          </div>
 
           <div className='flex gap-2 mt-4'>
             <button
