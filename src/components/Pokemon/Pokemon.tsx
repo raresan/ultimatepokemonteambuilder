@@ -188,7 +188,7 @@ export default function Pokemon({
             <h3 className='font-bold mb-2'>Effort Values Earned:</h3>
 
             {pokemonData.stats.filter((s) => s.effort > 0).length === 0 ? (
-              <div className='p-4 text-red-500'>No EVs</div>
+              <div className='p-4 text-red-500'>Error fetching data.</div>
             ) : (
               <ul className='flex justify-center gap-2'>
                 {pokemonData.stats
