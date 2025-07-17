@@ -91,16 +91,29 @@ export default function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-4 border bg-zekrom border-darkrai'
+      className='relative rounded-lg p-4 border-2 bg-zekrom border-darkrai'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       {pokemonData && (
         <button
           onClick={handleClear}
-          className='absolute top-2 right-4 hover:text-red-500 text-xl font-bold'
+          className='absolute top-4 right-4 hover:text-red-500'
           aria-label='Remove Pokémon'
         >
-          ×
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            viewBox='0 0 256 256'
+            className='w-4 h-4 fill-current'
+          >
+            <path
+              fill='currentColor'
+              d='M165.4,20.5c-1.7-1.7-4.7-1.7-6.7,0L11.3,168.2c-1.7,1.7-1.7,4.7,0,6.7l28.6,28.6c1.7,1.7,5.4,3.4,8.1,3.4h91.8
+        c2.7,0,6-1.3,8.1-3.4l96.9-96.9c1.7-1.7,1.7-4.7,0-6.7L165.4,20.5z M138.8,185.6c-1.7,1.7-5.4,3.4-8.1,3.4h-71
+        c-2.7,0-6-1.3-8.1-3.4l-13.5-13.5c-1.7-1.7-1.7-4.7,0-6.7l54.2-54.2c1.7-1.7,4.7-1.7,6.7,0l53.8,53.8c1.7,1.7,1.7,4.7,0,6.7
+        L138.8,185.6z'
+            />
+            <path fill='currentColor' d='M43.9,221h170.6v15.8H43.9V221z' />
+          </svg>
         </button>
       )}
 
