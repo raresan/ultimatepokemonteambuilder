@@ -118,7 +118,7 @@ export default function TeamBuilder() {
         </button>
       )} */}
 
-      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 w-full max-w-7xl'>
+      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>
         {team.map((teamMember, index) => (
           <Pokemon
             key={index}
