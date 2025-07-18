@@ -44,7 +44,7 @@ export default function Pokemon({
 
   useEffect(() => {
     if (shiny) {
-      playAudio('/assets/audio/shiny.mp3', 0.5)
+      playAudio('/assets/audio/shiny.mp3', 0.2)
     }
 
     setTimeout(() => {
@@ -98,6 +98,16 @@ export default function Pokemon({
     setShiny(false)
 
     onUpdate({ data: undefined, shiny: false }, index)
+  }
+
+  const maxStat = 255
+
+  const getBarColor = (stat: number) => {
+    if (stat >= 150) return 'bg-blue-500'
+    if (stat >= 100) return 'bg-green-500'
+    if (stat >= 80) return 'bg-yellow-400'
+    if (stat >= 50) return 'bg-orange-400'
+    return 'bg-red-500'
   }
 
   return (
@@ -154,27 +164,63 @@ export default function Pokemon({
             ))}
           </div>
 
-          <div className='relative w-[200px] h-[200px]'>
-            <img
-              src={`/assets/gif/shiny.gif?t=${
-                shiny && !hasAnimatedShiny ? Date.now() : undefined
-              }`}
-              alt='Shiny Sparkles'
-              className='absolute inset-0 z-10 pointer-events-none'
-              style={{ display: shiny && !hasAnimatedShiny ? 'block' : 'none' }}
-            />
+          <div className='flex gap-4 w-full'>
+            <div className='relative basis-1/2'>
+              <img
+                src={`/assets/gif/shiny.gif?t=${
+                  shiny && !hasAnimatedShiny ? Date.now() : undefined
+                }`}
+                alt='Shiny Sparkles'
+                className='absolute inset-0 z-10 pointer-events-none'
+                style={{
+                  display: shiny && !hasAnimatedShiny ? 'block' : 'none',
+                }}
+              />
 
-            <Image
-              src={
-                shiny
-                  ? pokemonData.sprites.other.home.front_shiny
-                  : pokemonData.sprites.other.home.front_default
-              }
-              alt={pokemonData.name}
-              width={200}
-              height={200}
-              className='relative z-0'
-            />
+              <Image
+                src={
+                  shiny
+                    ? pokemonData.sprites.other.home.front_shiny
+                    : pokemonData.sprites.other.home.front_default
+                }
+                alt={pokemonData.name}
+                width={200}
+                height={200}
+                className='relative z-0'
+              />
+            </div>
+
+            <div className='flex flex-col justify-center basis-1/2 gap-2'>
+              {pokemonData.stats.map((stat, index) => {
+                const percent = (stat.base_stat / maxStat) * 100
+
+                return (
+                  <div key={index} className='flex items-center gap-2 h-3'>
+                    <span className='w-10 capitalize text-[0.7rem]/1 text-right'>
+                      {stat.stat.name
+                        .replace('-', ' ')
+                        .replace('special', 'sp.')
+                        .replace('attack', 'atk')
+                        .replace('defense', 'def')}
+                      :
+                    </span>
+
+                    <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
+                      <div
+                        className={`absolute top-0 left-0 h-full ${getBarColor(
+                          stat.base_stat,
+                        )}`}
+                        style={{ width: `${percent}%` }}
+                      />
+
+                      <span className='text-[0.7rem]/1 relative drop-shadow-[0_1px_1px_black]'>
+                        {stat.base_stat}
+                      </span>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
 
           <div className='flex gap-2 mt-4'>
@@ -198,7 +244,7 @@ export default function Pokemon({
                 'px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai active:bg-foreground'
               }
             >
-              🔊
+              🗣️
             </button>
           </div>
 
