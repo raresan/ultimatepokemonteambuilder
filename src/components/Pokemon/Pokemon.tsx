@@ -126,29 +126,42 @@ export default function Pokemon({
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       {pokemonData && (
-        <button
-          onClick={handleClear}
-          className='absolute top-4 right-4 hover:text-red-500 transition-colors duration-300 cursor-pointer'
-          aria-label='Remove Pokémon'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 256 256'
-            className='w-4 h-4 fill-current'
-          >
-            <path
-              fill='currentColor'
-              d='M165.4,20.5c-1.7-1.7-4.7-1.7-6.7,0L11.3,168.2c-1.7,1.7-1.7,4.7,0,6.7l28.6,28.6c1.7,1.7,5.4,3.4,8.1,3.4h91.8
-        c2.7,0,6-1.3,8.1-3.4l96.9-96.9c1.7-1.7,1.7-4.7,0-6.7L165.4,20.5z M138.8,185.6c-1.7,1.7-5.4,3.4-8.1,3.4h-71
-        c-2.7,0-6-1.3-8.1-3.4l-13.5-13.5c-1.7-1.7-1.7-4.7,0-6.7l54.2-54.2c1.7-1.7,4.7-1.7,6.7,0l53.8,53.8c1.7,1.7,1.7,4.7,0,6.7
-        L138.8,185.6z'
-            />
-            <path fill='currentColor' d='M43.9,221h170.6v15.8H43.9V221z' />
-          </svg>
-        </button>
-      )}
+        <div className='flex justify-between'>
+          <label className='font-bold'>#{index + 1} Pokémon</label>
 
-      <label className='font-bold'>#{index + 1} Pokémon</label>
+          <ul className='flex gap-2'>
+            <li
+              onClick={() => setShiny((previous) => !previous)}
+              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer ${
+                shiny ? 'bg-gengar' : 'bg-background hover:bg-darkrai'
+              }`}
+            >
+              Shiny
+            </li>
+
+            <li
+              onClick={() =>
+                playAudio(
+                  pokemonData.cries.latest || pokemonData.cries.legacy,
+                  0.1,
+                )
+              }
+              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai'
+              }`}
+            >
+              Cry
+            </li>
+
+            <li
+              onClick={handleClear}
+              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai'
+              }`}
+            >
+              Clear
+            </li>
+          </ul>
+        </div>
+      )}
 
       <AutocompleteInput
         value={pokemonNameSearch}
@@ -263,31 +276,6 @@ export default function Pokemon({
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className='flex gap-2 mt-4'>
-            <button
-              onClick={() => setShiny((previous) => !previous)}
-              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer ${
-                shiny ? 'bg-foreground' : 'bg-background hover:bg-darkrai'
-              }`}
-            >
-              ✨
-            </button>
-
-            <button
-              onClick={() =>
-                playAudio(
-                  pokemonData.cries.latest || pokemonData.cries.legacy,
-                  0.1,
-                )
-              }
-              className={
-                'px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai active:bg-foreground'
-              }
-            >
-              🗣️
-            </button>
           </div>
 
           <div className='mt-6 w-full max-w-sm'>
