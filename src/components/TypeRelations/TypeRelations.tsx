@@ -6,8 +6,25 @@ type TypeRelationsProps = {
 }
 
 export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
-  const formatMultiplier = (multiplier: number) => {
-    return multiplier === 0 ? '-' : `*${multiplier}`
+  const getMultiplierInfo = (multiplier: number) => {
+    const data: Record<number, { icon: string; label: string }> = {
+      0: { icon: '✕', label: 'No effect (*0)' },
+      0.25: { icon: '▼', label: 'Mostly uneffective (*0.25)' },
+      0.5: { icon: '△', label: 'Not very effective (*0.5)' },
+      1: { icon: '◯', label: 'Effective (*1)' },
+      2: { icon: '⊙', label: 'Super effective (*2)' },
+      4: { icon: '★', label: 'Extremely effective (*4)' },
+    }
+
+    if (
+      typeof multiplier !== 'number' ||
+      isNaN(multiplier) ||
+      !data.hasOwnProperty(multiplier)
+    ) {
+      return { icon: '?', label: 'Invalid data' }
+    }
+
+    return data[multiplier]
   }
 
   return (
@@ -24,9 +41,16 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
               />
             </div>
 
-            <span className='grow-1 text-center text-[0.7rem]'>
-              {isPokemon ? formatMultiplier(value) : value}
-            </span>
+            {isPokemon ? (
+              <span
+                title={getMultiplierInfo(value).label}
+                className='grow-1 text-center text-[0.7rem]'
+              >
+                {getMultiplierInfo(value).icon}
+              </span>
+            ) : (
+              <span className='grow-1 text-center text-[0.7rem]'>{value}</span>
+            )}
           </div>
         </div>
       ))}
