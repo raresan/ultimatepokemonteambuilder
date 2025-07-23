@@ -101,13 +101,22 @@ export default function Pokemon({
   }
 
   const maxStat = 255
+  const maxBaseStatTotal = 720
+  let baseStatTotal = 0
 
-  const getBarColor = (stat: number) => {
-    if (stat >= 150) return 'bg-blue-500'
-    if (stat >= 100) return 'bg-green-500'
-    if (stat >= 80) return 'bg-yellow-400'
-    if (stat >= 50) return 'bg-orange-400'
+  const getBarColor = (stat: number, max: number) => {
+    const percent = (stat / max) * 100
+
+    if (percent === 100) return 'bg-purple-500'
+    if (percent >= 50) return 'bg-blue-500'
+    if (percent >= 35) return 'bg-green-500'
+    if (percent >= 20) return 'bg-yellow-400'
+    if (percent >= 5) return 'bg-orange-400'
     return 'bg-red-500'
+  }
+
+  const getBarPercentage = (stat: number, max: number) => {
+    return (stat / max) * 100
   }
 
   return (
@@ -191,8 +200,10 @@ export default function Pokemon({
             </div>
 
             <div className='flex flex-col justify-center basis-1/2 gap-2'>
+              <h3 className='font-bold'>Base Stats:</h3>
+
               {pokemonData.stats.map((stat, index) => {
-                const percent = (stat.base_stat / maxStat) * 100
+                baseStatTotal += stat.base_stat
 
                 return (
                   <div key={index} className='flex items-center gap-2 h-3'>
@@ -209,8 +220,14 @@ export default function Pokemon({
                       <div
                         className={`absolute top-0 left-0 h-full ${getBarColor(
                           stat.base_stat,
+                          maxStat,
                         )}`}
-                        style={{ width: `${percent}%` }}
+                        style={{
+                          width: `${getBarPercentage(
+                            stat.base_stat,
+                            maxStat,
+                          )}%`,
+                        }}
                       />
 
                       <span className='text-[0.7rem]/1 relative drop-shadow-[0_1px_1px_black]'>
@@ -220,6 +237,31 @@ export default function Pokemon({
                   </div>
                 )
               })}
+
+              <div className='flex items-center gap-2 h-3'>
+                <span className='w-10 capitalize text-[0.7rem]/1 text-right'>
+                  Total:
+                </span>
+
+                <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
+                  <div
+                    className={`absolute top-0 left-0 h-full ${getBarColor(
+                      baseStatTotal,
+                      maxBaseStatTotal,
+                    )}`}
+                    style={{
+                      width: `${getBarPercentage(
+                        baseStatTotal,
+                        maxBaseStatTotal,
+                      )}%`,
+                    }}
+                  />
+
+                  <span className='text-[0.7rem]/1 relative drop-shadow-[0_1px_1px_black]'>
+                    {baseStatTotal}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
