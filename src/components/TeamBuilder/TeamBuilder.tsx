@@ -72,15 +72,6 @@ export default function TeamBuilder() {
     setTeam(updatedTeam)
   }
 
-  // const handleClear = () => {
-  //   setTeam(
-  //     Array.from({ length: 6 }, () => ({
-  //       shiny: false,
-  //       data: undefined,
-  //     })),
-  //   )
-  // }
-
   if (loading) return <div className='p-4'>Loading...</div>
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
 
@@ -93,7 +84,7 @@ export default function TeamBuilder() {
         height={150}
       />
 
-      <h1 className='text-3xl font-bold mb-8'>Team Builder / EVs earned</h1>
+      <h1 className='text-3xl font-bold mb-8'>Team Builder / Planner</h1>
 
       <div className='text-center mb-8'>
         <p>
@@ -101,22 +92,8 @@ export default function TeamBuilder() {
           weaknesses, resistances and immunities.
         </p>
 
-        <p>
-          Also, you can check which EVs (Effort Values) they grant when
-          defeated, in case you need.
-        </p>
-
-        <p>At the end, you can see how many of them are weak to each type.</p>
+        <p>Down below, you can see how many of them are weak to each type.</p>
       </div>
-
-      {/* {team && (
-        <button
-          onClick={handleClear}
-          className='mb-8 px-4 py-2 rounded bg-red-600 hover:bg-red-500 active:bg-red-700 transition-colors duration-200 font-bold text-white shadow-md'
-        >
-          🧹 Reset Team
-        </button>
-      )} */}
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>
         {team.map((teamMember, index) => (
@@ -133,8 +110,7 @@ export default function TeamBuilder() {
         <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
 
         <p className='mb-4'>
-          Below, find how many Pokémon from your selected team are weak to each
-          type.
+          Find how many Pokémon from your selected team are weak to each type.
         </p>
 
         <TypeRelations data={calculateTeamWeaknesses(team)} />

@@ -10,9 +10,9 @@ const saira = Saira_Condensed({
 })
 
 export const metadata: Metadata = {
-  title: 'Pokémon Team Builder / EVs earned',
+  title: 'Pokémon Team Builder / Planner',
   description:
-    'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Also, you can check which EVs (Effort Values) they grant when defeated, in case you need. At the end, you can see how many of them are weak to each type.',
+    'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Down below, you can see how many of them are weak to each type.',
 }
 
 export default function RootLayout({

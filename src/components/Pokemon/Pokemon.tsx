@@ -258,27 +258,6 @@ export default function Pokemon({
               isPokemon
             />
           </div>
-
-          <div className='mt-6 w-full max-w-sm'>
-            <h3 className='font-bold mb-2'>Effort Values Earned:</h3>
-
-            {pokemonData.stats.filter((s) => s.effort > 0).length === 0 ? (
-              <div className='p-4 text-red-500'>Error fetching data.</div>
-            ) : (
-              <ul className='flex justify-center gap-2'>
-                {pokemonData.stats
-                  .filter((stat) => stat.effort > 0)
-                  .map((stat) => (
-                    <li
-                      key={stat.stat.name}
-                      className='px-6 py-2 rounded bg-darkrai capitalize'
-                    >
-                      {stat.effort} {stat.stat.name.replace('-', ' ')}
-                    </li>
-                  ))}
-              </ul>
-            )}
-          </div>
         </div>
       ) : (
         <div className='flex-1 flex items-center justify-center min-h-[450px]'>
