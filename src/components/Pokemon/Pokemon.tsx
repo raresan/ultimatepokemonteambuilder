@@ -107,12 +107,12 @@ export default function Pokemon({
   const getBarColor = (stat: number, max: number) => {
     const percent = (stat / max) * 100
 
-    if (percent === 100) return 'bg-purple-500'
-    if (percent >= 50) return 'bg-blue-500'
-    if (percent >= 35) return 'bg-green-500'
-    if (percent >= 20) return 'bg-yellow-400'
-    if (percent >= 5) return 'bg-orange-400'
-    return 'bg-red-500'
+    if (percent === 100) return 'bg-gengar'
+    if (percent >= 50) return 'bg-blastoise'
+    if (percent >= 35) return 'bg-rayquaza'
+    if (percent >= 20) return 'bg-zapdos'
+    if (percent >= 5) return 'bg-charizard'
+    return 'bg-groudon'
   }
 
   const getBarPercentage = (stat: number, max: number) => {

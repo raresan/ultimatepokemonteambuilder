@@ -6,6 +6,12 @@
 
   --zekrom: #1d1d1d;
   --darkrai: #282828;
+  --groudon: #b31d36;
+  --charizard: #f99933;
+  --zapdos: #ffdb4b;
+  --rayquaza: #1cac8c;
+  --blastoise: #6e49e7;
+  --gengar: #a53adf;
 }
 
 @theme inline {
@@ -13,6 +19,12 @@
   --color-foreground: var(--foreground);
   --color-zekrom: var(--zekrom);
   --color-darkrai: var(--darkrai);
+  --color-groudon: var(--groudon);
+  --color-charizard: var(--charizard);
+  --color-zapdos: var(--zapdos);
+  --color-rayquaza: var(--rayquaza);
+  --color-blastoise: var(--blastoise);
+  --color-gengar: var(--gengar);
   --font-saira: var(--font-saira);
 }
 
