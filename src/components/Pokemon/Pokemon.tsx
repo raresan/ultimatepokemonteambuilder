@@ -101,13 +101,13 @@ export default function Pokemon({
   }
 
   const maxStat = 255
-  const maxBaseStatTotal = 720
+  const maxBaseStatTotal = 780
   let baseStatTotal = 0
 
   const getBaseStatBarColor = (stat: number, max: number) => {
     const percent = (stat / max) * 100
 
-    if (percent === 100) return 'bg-gengar'
+    if (percent >= 100) return 'bg-gengar'
     if (percent >= 50) return 'bg-blastoise'
     if (percent >= 35) return 'bg-rayquaza'
     if (percent >= 20) return 'bg-zapdos'
@@ -118,11 +118,11 @@ export default function Pokemon({
   const getBaseStatTotalBarColor = (stat: number, max: number) => {
     const percent = (stat / max) * 100
 
-    if (percent === 100) return 'bg-gengar'
-    if (percent >= 80) return 'bg-blastoise'
-    if (percent >= 40) return 'bg-rayquaza'
-    if (percent >= 20) return 'bg-zapdos'
-    if (percent >= 10) return 'bg-charizard'
+    if (percent >= 100) return 'bg-gengar'
+    if (percent >= 75) return 'bg-blastoise'
+    if (percent >= 50) return 'bg-rayquaza'
+    if (percent >= 40) return 'bg-zapdos'
+    if (percent >= 30) return 'bg-charizard'
     return 'bg-groudon'
   }
 
@@ -140,15 +140,17 @@ export default function Pokemon({
         <div className='flex justify-between'>
           <label className='font-bold'>#{index + 1} Pokémon</label>
 
-          <ul className='flex gap-2'>
+          <ul className='flex gap-2 items-center'>
             <li
               onClick={() => setShiny((previous) => !previous)}
-              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer ${
-                shiny ? 'bg-gengar' : 'bg-background hover:bg-darkrai'
+              className={`transition-colors duration-300 cursor-pointer hover:text-charizard ${
+                shiny && 'text-groudon'
               }`}
             >
-              Shiny
+              ✦
             </li>
+
+            <li className='w-[1px] h-3 bg-foreground opacity-10' />
 
             <li
               onClick={() =>
@@ -157,18 +159,18 @@ export default function Pokemon({
                   0.1,
                 )
               }
-              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai'
-              }`}
+              className='transition-opacity duration-300 cursor-pointer hover:opacity-50 active:opacity-100'
             >
-              Cry
+              🗣
             </li>
+
+            <li className='w-[1px] h-3 bg-foreground opacity-10' />
 
             <li
               onClick={handleClear}
-              className={`px-3 py-1 rounded transition-colors duration-300 cursor-pointer bg-background hover:bg-darkrai'
-              }`}
+              className='transition-opacity duration-300 cursor-pointer hover:opacity-50 active:opacity-100'
             >
-              Clear
+              ↺
             </li>
           </ul>
         </div>
