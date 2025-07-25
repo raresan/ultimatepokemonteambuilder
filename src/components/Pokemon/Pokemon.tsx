@@ -104,7 +104,7 @@ export default function Pokemon({
   const maxBaseStatTotal = 720
   let baseStatTotal = 0
 
-  const getBarColor = (stat: number, max: number) => {
+  const getBaseStatBarColor = (stat: number, max: number) => {
     const percent = (stat / max) * 100
 
     if (percent === 100) return 'bg-gengar'
@@ -112,6 +112,17 @@ export default function Pokemon({
     if (percent >= 35) return 'bg-rayquaza'
     if (percent >= 20) return 'bg-zapdos'
     if (percent >= 5) return 'bg-charizard'
+    return 'bg-groudon'
+  }
+
+  const getBaseStatTotalBarColor = (stat: number, max: number) => {
+    const percent = (stat / max) * 100
+
+    if (percent === 100) return 'bg-gengar'
+    if (percent >= 80) return 'bg-blastoise'
+    if (percent >= 40) return 'bg-rayquaza'
+    if (percent >= 20) return 'bg-zapdos'
+    if (percent >= 10) return 'bg-charizard'
     return 'bg-groudon'
   }
 
@@ -231,7 +242,7 @@ export default function Pokemon({
 
                     <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
                       <div
-                        className={`absolute top-0 left-0 h-full ${getBarColor(
+                        className={`absolute top-0 left-0 h-full ${getBaseStatBarColor(
                           stat.base_stat,
                           maxStat,
                         )}`}
@@ -258,7 +269,7 @@ export default function Pokemon({
 
                 <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
                   <div
-                    className={`absolute top-0 left-0 h-full ${getBarColor(
+                    className={`absolute top-0 left-0 h-full ${getBaseStatTotalBarColor(
                       baseStatTotal,
                       maxBaseStatTotal,
                     )}`}

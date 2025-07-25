@@ -8,8 +8,8 @@ type TypeRelationsProps = {
 export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   const getMultiplierInfo = (multiplier: number) => {
     const data: Record<number, { icon: string; label: string }> = {
-      0: { icon: '✕', label: 'No effect (*0)' },
-      0.25: { icon: '▼', label: 'Mostly uneffective (*0.25)' },
+      0: { icon: '✕', label: 'Has no effect (*0)' },
+      0.25: { icon: '▼', label: 'Mostly ineffective (*0.25)' },
       0.5: { icon: '△', label: 'Not very effective (*0.5)' },
       1: { icon: '◯', label: 'Effective (*1)' },
       2: { icon: '⊙', label: 'Super effective (*2)' },
