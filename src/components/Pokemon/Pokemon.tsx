@@ -87,15 +87,16 @@ export default function Pokemon({
       const data = await fetchPokemon(matched.name)
 
       if (data) {
+        setShiny(false)
         setPokemonData(data)
       }
     }
   }
 
   const handleClear = () => {
-    setPokemonData(undefined)
     setPokemonNameSearch('')
     setShiny(false)
+    setPokemonData(undefined)
 
     onUpdate({ data: undefined, shiny: false }, index)
   }
