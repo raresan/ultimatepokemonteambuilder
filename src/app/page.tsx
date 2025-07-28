@@ -1,11 +1,5 @@
-import Footer from '@/components/Footer/Footer'
-import TeamBuilder from '@/components/TeamBuilder/TeamBuilder'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
-  return (
-    <>
-      <TeamBuilder />
-      <Footer />
-    </>
-  )
+export default function RootPage() {
+  redirect('/en')
 }

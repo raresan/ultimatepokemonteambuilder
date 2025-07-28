@@ -8,6 +8,8 @@ import { PokemonOption, PokemonTeamMember } from '@/types'
 import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
 import Image from 'next/image'
 
+import useTranslations from '@/hooks/useTranslations'
+
 const formatPokemonList = (allPokemon: PokemonOption[]) => {
   const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {
     const splittedName = pokemon.name.split('-')
@@ -47,6 +49,8 @@ export default function TeamBuilder() {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
+  const t = useTranslations()
+
   useEffect(() => {
     async function fetchAllPokemon() {
       try {
@@ -77,6 +81,9 @@ export default function TeamBuilder() {
 
   return (
     <div className='min-h-screen flex flex-col items-center p-8'>
+      <h1>{t('home.title')}</h1>
+      <p>{t('home.description')}</p>
+
       <Image
         src={'/assets/images/pokemon-logo.png'}
         alt={'Pokémon Logo'}
