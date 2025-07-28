@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { getPokemon } from '@/services/pokeapi'
 import { getBorderColors } from '@/utils/getBorderColors'
 import Image from 'next/image'
+import useTranslations from '@/hooks/useTranslations'
 
 type PokemonProps = {
   index: number
@@ -26,6 +27,8 @@ export default function Pokemon({
     pokemonData?.name || '',
   )
   const [error, setError] = useState<string | null>(null)
+
+  const t = useTranslations()
 
   useEffect(() => {
     const updatedPokemon = {
@@ -227,7 +230,7 @@ export default function Pokemon({
             </div>
 
             <div className='flex flex-col justify-center basis-1/2 gap-2'>
-              <h3 className='font-bold'>Base Stats:</h3>
+              <h3 className='font-bold'>{t('pokemon.baseStatsTitle')}</h3>
 
               {pokemonData.stats.map((stat, index) => {
                 baseStatTotal += stat.base_stat
@@ -237,9 +240,10 @@ export default function Pokemon({
                     <span className='w-10 capitalize text-[0.7rem]/1 text-right'>
                       {stat.stat.name
                         .replace('-', ' ')
-                        .replace('special', 'sp.')
-                        .replace('attack', 'atk')
-                        .replace('defense', 'def')}
+                        .replace('special', t('pokemon.baseStatSpecial'))
+                        .replace('attack', t('pokemon.baseStatAttack'))
+                        .replace('defense', t('pokemon.baseStatDefense'))
+                        .replace('speed', t('pokemon.baseStatSpeed'))}
                       :
                     </span>
 
@@ -267,7 +271,7 @@ export default function Pokemon({
 
               <div className='flex items-center gap-2 h-3'>
                 <span className='w-10 capitalize text-[0.7rem]/1 text-right'>
-                  Total:
+                  {t('pokemon.baseStatsTotalTitle')}
                 </span>
 
                 <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
@@ -293,9 +297,7 @@ export default function Pokemon({
           </div>
 
           <div className='mt-6 w-full max-w-sm'>
-            <h3 className='font-bold mb-2'>
-              Weaknesses / Resistances / Immunities:
-            </h3>
+            <h3 className='font-bold mb-2'>{t('pokemon.weaknessesTitle')}</h3>
 
             <TypeRelations
               data={calculateDamageMultipliers(pokemonData.types)}

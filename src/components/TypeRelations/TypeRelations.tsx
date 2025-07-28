@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import useTranslations from '@/hooks/useTranslations'
 
 type TypeRelationsProps = {
   data: { [type: string]: number }
@@ -6,14 +9,16 @@ type TypeRelationsProps = {
 }
 
 export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
+  const t = useTranslations()
+
   const getMultiplierInfo = (multiplier: number) => {
     const data: Record<number, { icon: string; label: string }> = {
-      0: { icon: '✕', label: 'Has no effect (*0)' },
-      0.25: { icon: '▼', label: 'Mostly ineffective (*0.25)' },
-      0.5: { icon: '△', label: 'Not very effective (*0.5)' },
-      1: { icon: '◯', label: 'Effective (*1)' },
-      2: { icon: '⊙', label: 'Super effective (*2)' },
-      4: { icon: '★', label: 'Extremely effective (*4)' },
+      0: { icon: '✕', label: t('typeRelations.hasNoEffect') },
+      0.25: { icon: '▼', label: t('typeRelations.mostlyIneffective') },
+      0.5: { icon: '△', label: t('typeRelations.notVeryEffective') },
+      1: { icon: '◯', label: t('typeRelations.effective') },
+      2: { icon: '⊙', label: t('typeRelations.superEffective') },
+      4: { icon: '★', label: t('typeRelations.extremelyEffective') },
     }
 
     if (

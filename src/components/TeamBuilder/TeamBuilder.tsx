@@ -7,7 +7,6 @@ import Pokemon from '@/components/Pokemon/Pokemon'
 import { PokemonOption, PokemonTeamMember } from '@/types'
 import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
 import Image from 'next/image'
-
 import useTranslations from '@/hooks/useTranslations'
 
 const formatPokemonList = (allPokemon: PokemonOption[]) => {
@@ -81,9 +80,6 @@ export default function TeamBuilder() {
 
   return (
     <div className='min-h-screen flex flex-col items-center p-8'>
-      <h1>{t('home.title')}</h1>
-      <p>{t('home.description')}</p>
-
       <Image
         src={'/assets/images/pokemon-logo.png'}
         alt={'Pokémon Logo'}
@@ -91,15 +87,12 @@ export default function TeamBuilder() {
         height={150}
       />
 
-      <h1 className='text-3xl font-bold mb-8'>Team Builder / Planner</h1>
+      <h1 className='text-3xl font-bold mb-8'>{t('teamBuilder.title')}</h1>
 
       <div className='text-center mb-8'>
-        <p>
-          Choose six Pokémon for your team. You can see their individual
-          weaknesses, resistances and immunities.
-        </p>
+        <p>{t('teamBuilder.description')}</p>
 
-        <p>Down below, you can see how many of them are weak to each type.</p>
+        <p>{t('teamBuilder.description2')}</p>
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>
@@ -114,11 +107,11 @@ export default function TeamBuilder() {
       </div>
 
       <div className='mt-12 w-full max-w-7xl'>
-        <h2 className='text-2xl font-bold mb-4'>Team Overall Weaknesses:</h2>
+        <h2 className='text-2xl font-bold mb-4'>
+          {t('teamBuilder.teamWeaknessesTitle')}
+        </h2>
 
-        <p className='mb-4'>
-          Find how many Pokémon from your selected team are weak to each type.
-        </p>
+        <p className='mb-4'>{t('teamBuilder.teamWeaknessesDescription')}</p>
 
         <TypeRelations data={calculateTeamWeaknesses(team)} />
       </div>
