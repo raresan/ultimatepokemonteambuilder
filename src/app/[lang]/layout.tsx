@@ -20,7 +20,8 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const dictionary = dictionaries[params.lang] || dictionaries.en
+  const { lang } = await params
+  const dictionary = dictionaries[lang] || dictionaries.en
 
   return {
     title: dictionary.metadata.title,

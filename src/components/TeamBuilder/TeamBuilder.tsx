@@ -85,7 +85,8 @@ export default function TeamBuilder() {
         alt={'Pokémon Logo'}
         width={450}
         height={150}
-        className='invert'
+        className='invert select-none'
+        draggable='false'
       />
 
       <h1 className='text-3xl font-bold mb-8'>{t('teamBuilder.title')}</h1>

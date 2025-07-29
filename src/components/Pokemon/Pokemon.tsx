@@ -1,3 +1,5 @@
+'use client'
+
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 import { PokemonData, PokemonOption, PokemonTeamMember } from '@/types'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
@@ -312,6 +314,8 @@ export default function Pokemon({
             alt={'Pokéball'}
             width={100}
             height={100}
+            className='grayscale select-none'
+            draggable='false'
           />
         </div>
       )}
