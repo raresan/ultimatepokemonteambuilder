@@ -1,6 +1,11 @@
 const englishDictionary = {
+  metadata: {
+    title: 'Ultimate Pokémon Team Builder / Planner',
+    description:
+      'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Down below, you can see how many of them are weak to each type.',
+  },
   teamBuilder: {
-    title: 'Team Builder / Planner',
+    title: 'Ultimate Team Builder / Planner',
     description:
       'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities.',
     description2:

@@ -1,6 +1,11 @@
 const portugueseDictionary = {
+  metadata: {
+    title: 'Construtor / Planejador de Times Pokémon Definitivo',
+    description:
+      'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
+  },
   teamBuilder: {
-    title: 'Construtor / Planejador de Times',
+    title: 'Construtor / Planejador de Times Definitivo',
     description:
       'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
     description2:

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Saira_Condensed } from 'next/font/google'
 import '../globals.css'
+import en from '@/i18n/en'
+import pt from '@/i18n/pt'
 
 const saira = Saira_Condensed({
   variable: '--font-saira',
@@ -9,10 +11,21 @@ const saira = Saira_Condensed({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'Pokémon Team Builder / Planner',
-  description:
-    'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Down below, you can see how many of them are weak to each type.',
+type I18nMeta = { metadata: { title: string; description: string } }
+
+const dictionaries: Record<string, I18nMeta> = { en, pt }
+
+interface Props {
+  params: { lang: string }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const dictionary = dictionaries[params.lang] || dictionaries.en
+
+  return {
+    title: dictionary.metadata.title,
+    description: dictionary.metadata.description,
+  }
 }
 
 export default async function LangLayout({
