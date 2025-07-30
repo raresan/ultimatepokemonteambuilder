@@ -4,6 +4,10 @@ const portugueseDictionary = {
     description:
       'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
   },
+  autocompleteInput: {
+    notSupported: 'Desculpe! Seu browser não suporta reconhecimento por voz.',
+    voiceLanguage: 'pt-BR',
+  },
   teamBuilder: {
     title: 'Construtor / Planejador de Times Definitivo',
     description:

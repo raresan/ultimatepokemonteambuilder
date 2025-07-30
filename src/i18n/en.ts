@@ -4,6 +4,10 @@ const englishDictionary = {
     description:
       'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Down below, you can see how many of them are weak to each type.',
   },
+  autocompleteInput: {
+    notSupported: 'Sorry! Your browser does not support voice recognition.',
+    voiceLanguage: 'en-US',
+  },
   teamBuilder: {
     title: 'Ultimate Team Builder / Planner',
     description:

@@ -142,10 +142,10 @@ export default function Pokemon({
       className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
-      {pokemonData && (
-        <div className='flex justify-between'>
-          <label className='font-bold'>#{index + 1} Pokémon</label>
+      <div className='flex justify-between'>
+        <label className='font-bold'>#{index + 1} Pokémon</label>
 
+        {pokemonData && (
           <ul className='flex gap-2 items-center'>
             <li
               onClick={() => setShiny((previous) => !previous)}
@@ -179,8 +179,8 @@ export default function Pokemon({
               ↺
             </li>
           </ul>
-        </div>
-      )}
+        )}
+      </div>
 
       <AutocompleteInput
         value={pokemonNameSearch}
