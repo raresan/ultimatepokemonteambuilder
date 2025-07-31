@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Saira_Condensed } from 'next/font/google'
-import '../globals.css'
+import '@/app/globals.css'
 import en from '@/i18n/en'
 import pt from '@/i18n/pt'
+import { notFound } from 'next/navigation'
 
 const saira = Saira_Condensed({
   variable: '--font-saira',
@@ -21,6 +22,11 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params
+
+  if (!dictionaries[lang]) {
+    notFound()
+  }
+
   const dictionary = dictionaries[lang] || dictionaries.en
 
   return {
@@ -37,6 +43,10 @@ export default async function LangLayout({
   params: { lang: string }
 }>) {
   const { lang } = await params
+
+  if (!dictionaries[lang]) {
+    notFound()
+  }
 
   return (
     <html lang={lang} className={`${saira.variable} font-saira`}>
