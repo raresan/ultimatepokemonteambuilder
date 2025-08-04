@@ -1,6 +1,6 @@
 'use client'
 
-import { getAllPokemon } from '@/services/pokeapi'
+import { getAllPokemon, getPokemon } from '@/services/pokeapi'
 import { useEffect, useState } from 'react'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import Pokemon from '@/components/Pokemon/Pokemon'
@@ -8,7 +8,7 @@ import { PokemonOption, PokemonTeamMember } from '@/types'
 import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
 import Image from 'next/image'
 import useTranslations from '@/hooks/useTranslations'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 const formatPokemonList = (allPokemon: PokemonOption[]) => {
   const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {
@@ -51,19 +51,50 @@ const buildQueryParams = (team: PokemonTeamMember[]): string => {
   return params.toString()
 }
 
+export const parseQueryParams = async (
+  searchParams: URLSearchParams,
+): Promise<PokemonTeamMember[]> => {
+  const promises = Array.from({ length: 6 }, async (_, index) => {
+    const value = searchParams.get(`p${index + 1}`)
+
+    if (value) {
+      const [name, shinyString] = value.split('_')
+
+      try {
+        const pokemon = await getPokemon(name)
+
+        return {
+          data: pokemon,
+          shiny: shinyString === '1',
+        } as PokemonTeamMember
+      } catch (error) {
+        console.error(`Erro ao buscar ${name}:`, error)
+      }
+    }
+
+    // Retorno default caso falhe
+    return {
+      data: undefined,
+      shiny: false,
+    } as PokemonTeamMember
+  })
+
+  return await Promise.all(promises)
+}
+
 export default function TeamBuilder() {
   const [pokemonList, setPokemonList] = useState<PokemonOption[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
 
-  const [team, setTeam] = useState<PokemonTeamMember[]>(
-    Array.from({ length: 6 }, () => ({
-      shiny: false,
-      data: undefined,
-    })),
-  )
+  const [team, setTeam] = useState<PokemonTeamMember[]>([])
+  // Array.from({ length: 6 }, () => ({
+  //   shiny: false,
+  //   data: undefined,
+  // })),
 
   const t = useTranslations()
+  const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
 
@@ -81,12 +112,29 @@ export default function TeamBuilder() {
       }
     }
 
+    async function getTeamFromUrlParams() {
+      try {
+        const teamFromParams = await parseQueryParams(searchParams)
+
+        console.log(teamFromParams)
+
+        setTeam(teamFromParams)
+      } catch (error: any) {
+        setError(error.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
     fetchAllPokemon()
+    getTeamFromUrlParams()
   }, [])
 
   useEffect(() => {
     const queryParams = buildQueryParams(team)
     router.replace(`${pathname}?${queryParams}`)
+
+    console.log('team', team)
   }, [team])
 
   const updateTeam = (pokemon: PokemonTeamMember, index: number) => {
