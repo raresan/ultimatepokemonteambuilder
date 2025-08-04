@@ -45,16 +45,6 @@ export default function Pokemon({
     onUpdate(updatedPokemon, index)
   }, [pokemonData, shiny])
 
-  useEffect(() => {
-    if (shiny) {
-      playAudio('/assets/audio/shiny.mp3', 0.2)
-    }
-
-    setTimeout(() => {
-      setHasAnimatedShiny(shiny)
-    }, 1000)
-  }, [shiny])
-
   const audio = useRef<HTMLAudioElement>(new Audio())
 
   const playAudio = (src: string, volume: number) => {
@@ -145,7 +135,21 @@ export default function Pokemon({
         {pokemonData && (
           <ul className='flex gap-2 items-center'>
             <li
-              onClick={() => setShiny((previous) => !previous)}
+              onClick={() => {
+                setShiny((previous) => {
+                  const newShiny = !previous
+
+                  if (newShiny) {
+                    playAudio('/assets/audio/shiny.mp3', 0.2)
+                  }
+
+                  setTimeout(() => {
+                    setHasAnimatedShiny(newShiny)
+                  }, 1000)
+
+                  return newShiny
+                })
+              }}
               className={`transition-colors duration-300 cursor-pointer hover:text-charizard ${
                 shiny && 'text-groudon'
               }`}
