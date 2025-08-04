@@ -8,6 +8,7 @@ import { PokemonOption, PokemonTeamMember } from '@/types'
 import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
 import Image from 'next/image'
 import useTranslations from '@/hooks/useTranslations'
+import { usePathname, useRouter } from 'next/navigation'
 
 const formatPokemonList = (allPokemon: PokemonOption[]) => {
   const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {
@@ -35,8 +36,25 @@ const formatPokemonList = (allPokemon: PokemonOption[]) => {
   return allPokemonUpdated
 }
 
+const buildQueryParams = (team: PokemonTeamMember[]): string => {
+  const params = new URLSearchParams()
+
+  team.forEach((pokemon, index) => {
+    if (pokemon.data?.name) {
+      const key = `p${index + 1}`
+      const value = `${pokemon.data.name}_${pokemon.shiny ? '1' : '0'}`
+
+      params.append(key, value)
+    }
+  })
+
+  return params.toString()
+}
+
 export default function TeamBuilder() {
   const [pokemonList, setPokemonList] = useState<PokemonOption[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [error, setError] = useState<string | null>(null)
 
   const [team, setTeam] = useState<PokemonTeamMember[]>(
     Array.from({ length: 6 }, () => ({
@@ -45,10 +63,9 @@ export default function TeamBuilder() {
     })),
   )
 
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-
   const t = useTranslations()
+  const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     async function fetchAllPokemon() {
@@ -66,6 +83,11 @@ export default function TeamBuilder() {
 
     fetchAllPokemon()
   }, [])
+
+  useEffect(() => {
+    const queryParams = buildQueryParams(team)
+    router.replace(`${pathname}?${queryParams}`)
+  }, [team])
 
   const updateTeam = (pokemon: PokemonTeamMember, index: number) => {
     const updatedTeam = [...team]
