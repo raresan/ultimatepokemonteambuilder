@@ -72,7 +72,6 @@ export const parseQueryParams = async (
       }
     }
 
-    // Retorno default caso falhe
     return {
       data: undefined,
       shiny: false,
@@ -83,15 +82,10 @@ export const parseQueryParams = async (
 }
 
 export default function TeamBuilder() {
-  const [pokemonList, setPokemonList] = useState<PokemonOption[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<string | null>(null)
-
+  const [pokemonList, setPokemonList] = useState<PokemonOption[]>([])
   const [team, setTeam] = useState<PokemonTeamMember[]>([])
-  // Array.from({ length: 6 }, () => ({
-  //   shiny: false,
-  //   data: undefined,
-  // })),
 
   const t = useTranslations()
   const searchParams = useSearchParams()
@@ -116,8 +110,6 @@ export default function TeamBuilder() {
       try {
         const teamFromParams = await parseQueryParams(searchParams)
 
-        console.log(teamFromParams)
-
         setTeam(teamFromParams)
       } catch (error: any) {
         setError(error.message)
@@ -132,9 +124,7 @@ export default function TeamBuilder() {
 
   useEffect(() => {
     const queryParams = buildQueryParams(team)
-    router.replace(`${pathname}?${queryParams}`)
-
-    console.log('team', team)
+    router.replace(`${pathname}?${queryParams}`, { scroll: false })
   }, [team])
 
   const updateTeam = (pokemon: PokemonTeamMember, index: number) => {
@@ -168,10 +158,11 @@ export default function TeamBuilder() {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>
-        {team.map((teamMember, index) => (
+        {team?.map((teamMember, index) => (
           <Pokemon
             key={index}
             index={index}
+            pokemon={teamMember}
             pokemonList={pokemonList}
             onUpdate={updateTeam}
           />

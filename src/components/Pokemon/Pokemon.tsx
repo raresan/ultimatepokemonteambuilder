@@ -12,19 +12,23 @@ import useTranslations from '@/hooks/useTranslations'
 
 type PokemonProps = {
   index: number
+  pokemon: PokemonTeamMember
   pokemonList: PokemonOption[]
   onUpdate: (pokemon: PokemonTeamMember, index: number) => void
 }
 
 export default function Pokemon({
   index,
+  pokemon,
   pokemonList,
   onUpdate,
 }: PokemonProps) {
-  const [shiny, setShiny] = useState<boolean>(false)
+  const [shiny, setShiny] = useState<boolean>(pokemon.shiny)
   const [hasAnimatedShiny, setHasAnimatedShiny] = useState<boolean>(false)
 
-  const [pokemonData, setPokemonData] = useState<PokemonData>()
+  const [pokemonData, setPokemonData] = useState<PokemonData | undefined>(
+    pokemon.data,
+  )
   const [pokemonNameSearch, setPokemonNameSearch] = useState<string>(
     pokemonData?.name || '',
   )
@@ -42,12 +46,6 @@ export default function Pokemon({
   }, [pokemonData, shiny])
 
   useEffect(() => {
-    if (!pokemonData) return
-
-    playAudio(pokemonData.cries.latest || pokemonData.cries.legacy, 0.1)
-  }, [pokemonData])
-
-  useEffect(() => {
     if (shiny) {
       playAudio('/assets/audio/shiny.mp3', 0.2)
     }
@@ -60,8 +58,6 @@ export default function Pokemon({
   const audio = useRef<HTMLAudioElement>(new Audio())
 
   const playAudio = (src: string, volume: number) => {
-    if (!pokemonData) return
-
     audio.current.src = src
     audio.current.volume = volume
     audio.current.play()
@@ -94,6 +90,7 @@ export default function Pokemon({
       if (data) {
         setShiny(false)
         setPokemonData(data)
+        playAudio(data.cries.latest || data.cries.legacy, 0.1)
       }
     }
   }
