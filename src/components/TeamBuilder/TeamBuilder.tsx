@@ -1,6 +1,6 @@
 'use client'
 
-import { getAllPokemon, getPokemon } from '@/services/pokeapi'
+import { getAllPokemon } from '@/services/pokeapi'
 import { useEffect, useState } from 'react'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import Pokemon from '@/components/Pokemon/Pokemon'
@@ -9,77 +9,8 @@ import { calculateTeamWeaknesses } from '@/utils/calculateTeamWeaknesses'
 import Image from 'next/image'
 import useTranslations from '@/hooks/useTranslations'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-
-const formatPokemonList = (allPokemon: PokemonOption[]) => {
-  const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {
-    const splittedName = pokemon.name.split('-')
-    const firstLetterUppercase = splittedName.map((name) => {
-      return name.charAt(0).toUpperCase() + name.slice(1)
-    })
-
-    const firstName = firstLetterUppercase[0]
-    const slicedLastNames = firstLetterUppercase.slice(1)
-    const lastName = slicedLastNames.join(' ')
-    const lastNameFormatted = lastName.length ? ` (${lastName})` : ''
-    const formattedName = firstName + lastNameFormatted
-
-    return {
-      ...pokemon,
-      formattedName,
-    }
-  })
-
-  allPokemonUpdated.sort((a: PokemonOption, b: PokemonOption) =>
-    a.name.localeCompare(b.name),
-  )
-
-  return allPokemonUpdated
-}
-
-const buildQueryParams = (team: PokemonTeamMember[]): string => {
-  const params = new URLSearchParams()
-
-  team.forEach((pokemon, index) => {
-    if (pokemon.data?.name) {
-      const key = `p${index + 1}`
-      const value = `${pokemon.data.name}_${pokemon.shiny ? '1' : '0'}`
-
-      params.append(key, value)
-    }
-  })
-
-  return params.toString()
-}
-
-export const parseQueryParams = async (
-  searchParams: URLSearchParams,
-): Promise<PokemonTeamMember[]> => {
-  const promises = Array.from({ length: 6 }, async (_, index) => {
-    const value = searchParams.get(`p${index + 1}`)
-
-    if (value) {
-      const [name, shinyString] = value.split('_')
-
-      try {
-        const pokemon = await getPokemon(name)
-
-        return {
-          data: pokemon,
-          shiny: shinyString === '1',
-        } as PokemonTeamMember
-      } catch (error) {
-        console.error(`Erro ao buscar ${name}:`, error)
-      }
-    }
-
-    return {
-      data: undefined,
-      shiny: false,
-    } as PokemonTeamMember
-  })
-
-  return await Promise.all(promises)
-}
+import { formatPokemonList } from '@/utils/formatPokemonList'
+import { buildQueryParams, parseQueryParams } from '@/utils/queryParams'
 
 export default function TeamBuilder() {
   const [loading, setLoading] = useState<boolean>(true)

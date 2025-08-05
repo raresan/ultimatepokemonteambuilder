@@ -9,6 +9,13 @@ import { getPokemon } from '@/services/pokeapi'
 import { getBorderColors } from '@/utils/getBorderColors'
 import Image from 'next/image'
 import useTranslations from '@/hooks/useTranslations'
+import {
+  maxStat,
+  maxBaseStatTotal,
+  getBaseStatBarColor,
+  getBaseStatTotalBarColor,
+  getBarPercentage,
+} from '@/utils/statsBar'
 
 type PokemonProps = {
   index: number
@@ -35,6 +42,8 @@ export default function Pokemon({
   const [error, setError] = useState<string | null>(null)
 
   const t = useTranslations()
+
+  const baseStatTotal = useRef<number>(0)
 
   useEffect(() => {
     const updatedPokemon = {
@@ -91,36 +100,6 @@ export default function Pokemon({
     setPokemonData(undefined)
 
     onUpdate({ data: undefined, shiny: false }, index)
-  }
-
-  const maxStat = 255
-  const maxBaseStatTotal = 780
-  let baseStatTotal = 0
-
-  const getBaseStatBarColor = (stat: number, max: number) => {
-    const percent = (stat / max) * 100
-
-    if (percent >= 100) return 'bg-gengar'
-    if (percent >= 50) return 'bg-blastoise'
-    if (percent >= 35) return 'bg-rayquaza'
-    if (percent >= 20) return 'bg-zapdos'
-    if (percent >= 5) return 'bg-charizard'
-    return 'bg-groudon'
-  }
-
-  const getBaseStatTotalBarColor = (stat: number, max: number) => {
-    const percent = (stat / max) * 100
-
-    if (percent >= 100) return 'bg-gengar'
-    if (percent >= 75) return 'bg-blastoise'
-    if (percent >= 50) return 'bg-rayquaza'
-    if (percent >= 40) return 'bg-zapdos'
-    if (percent >= 30) return 'bg-charizard'
-    return 'bg-groudon'
-  }
-
-  const getBarPercentage = (stat: number, max: number) => {
-    return (stat / max) * 100
   }
 
   return (
@@ -236,7 +215,7 @@ export default function Pokemon({
               <h3 className='font-bold'>{t('pokemon.baseStatsTitle')}</h3>
 
               {pokemonData.stats.map((stat, index) => {
-                baseStatTotal += stat.base_stat
+                baseStatTotal.current += stat.base_stat
 
                 return (
                   <div key={index} className='flex items-center gap-2 h-3'>
@@ -280,19 +259,19 @@ export default function Pokemon({
                 <div className='flex items-center justify-center flex-1 h-full relative overflow-hidden'>
                   <div
                     className={`absolute top-0 left-0 h-full ${getBaseStatTotalBarColor(
-                      baseStatTotal,
+                      baseStatTotal.current,
                       maxBaseStatTotal,
                     )}`}
                     style={{
                       width: `${getBarPercentage(
-                        baseStatTotal,
+                        baseStatTotal.current,
                         maxBaseStatTotal,
                       )}%`,
                     }}
                   />
 
                   <span className='text-[0.7rem]/1 relative drop-shadow-[0_1px_1px_black]'>
-                    {baseStatTotal}
+                    {baseStatTotal.current}
                   </span>
                 </div>
               </div>
