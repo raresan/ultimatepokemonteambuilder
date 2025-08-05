@@ -1,5 +1,5 @@
 import { getPokemon } from '@/services/pokeapi'
-import { PokemonTeamMember } from '@/types'
+import type { PokemonTeamMember } from '@/types'
 
 export const buildQueryParams = (team: PokemonTeamMember[]): string => {
   const params = new URLSearchParams()

@@ -1,5 +1,5 @@
 import { TYPE_COLORS } from '@/constants/typeColors'
-import { PokemonData } from '@/types'
+import type { PokemonData } from '@/types'
 
 export function calculateDamageMultipliers(types: PokemonData['types']) {
   const multipliers: { [key: string]: number } = {}

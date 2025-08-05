@@ -1,4 +1,4 @@
-import { PokemonData } from '@/types'
+import type { PokemonData } from '@/types'
 
 const BASE_URL = 'https://pokeapi.co/api/v2'
 

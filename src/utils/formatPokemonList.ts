@@ -1,4 +1,4 @@
-import { PokemonOption } from '@/types'
+import type { PokemonOption } from '@/types'
 
 export const formatPokemonList = (allPokemon: PokemonOption[]) => {
   const allPokemonUpdated = allPokemon.map((pokemon: PokemonOption) => {

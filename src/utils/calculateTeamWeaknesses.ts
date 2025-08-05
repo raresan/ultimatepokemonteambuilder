@@ -1,6 +1,6 @@
 import { TYPE_COLORS } from '@/constants/typeColors'
 import { calculateDamageMultipliers } from './calculateDamageMultipliers'
-import { PokemonTeamMember } from '@/types'
+import type { PokemonTeamMember } from '@/types'
 
 export function calculateTeamWeaknesses(team: PokemonTeamMember[]) {
   const weaknessCount: { [type: string]: number } = {}

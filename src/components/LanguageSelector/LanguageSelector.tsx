@@ -9,7 +9,7 @@ export default function LanguageSelector() {
   const searchParams = useSearchParams()
 
   return (
-    <ul className='flex gap-1 p-2 fixed top-0 right-0'>
+    <ul className='flex gap-1 p-4 fixed top-0 right-0 z-10'>
       {Object.keys(dictionaries)?.map((lang, index) => (
         <Fragment key={index}>
           {index > 0 && <li>|</li>}
