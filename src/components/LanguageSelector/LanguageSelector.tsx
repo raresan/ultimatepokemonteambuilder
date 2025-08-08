@@ -15,6 +15,7 @@ export default function LanguageSelector() {
           {index > 0 && <li>|</li>}
           <li className='uppercase'>
             <Link
+              scroll={false}
               href={`/${lang}${
                 searchParams.toString() ? `?${searchParams.toString()}` : ''
               }`}

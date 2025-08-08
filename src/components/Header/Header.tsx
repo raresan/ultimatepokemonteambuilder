@@ -24,6 +24,8 @@ export default function Header() {
         <p>{t('teamBuilder.description')}</p>
 
         <p>{t('teamBuilder.description2')}</p>
+
+        <p>{t('teamBuilder.note')}</p>
       </div>
     </header>
   )

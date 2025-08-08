@@ -16,7 +16,7 @@ export default function Footer() {
           target='blank'
           className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
         >
-          Donate
+          PayPal
         </a>
       </p>
       <p>
@@ -27,7 +27,7 @@ export default function Footer() {
           target='blank'
           className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
         >
-          Issues
+          GitHub Issues
         </a>
       </p>
       <p>

@@ -13,7 +13,8 @@ const englishDictionary = {
     description:
       'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities.',
     description2:
-      'Down below, you can see how many of them are weak to each type.',
+      'Further down below, you can see how many of them are weak to each type. Also, you can share your team at the end.',
+    note: 'Please note that only Pokémon supported by Pokémon HOME are available on this website.',
     teamWeaknessesTitle: 'Team Overall Weaknesses:',
     teamWeaknessesDescription:
       'Find how many Pokémon from your selected team are weak to each type.',
@@ -41,8 +42,8 @@ const englishDictionary = {
     error: 'Error while copying!',
   },
   footer: {
-    donate: 'If you want to support this project, consider donating: ',
-    issue: 'Found any bugs? Please, open an issue in GitHub: ',
+    donate: 'Want to support this project? ',
+    issue: 'Found any bugs? ',
     copyright: '© of Azuxo Studio',
     nintendo: 'Pokémon is © of Nintendo',
   },

@@ -13,7 +13,8 @@ const portugueseDictionary = {
     description:
       'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
     description2:
-      'Abaixo, você pode ver quantos deles são fracos contra cada tipo.',
+      'Mais abaixo, você pode ver quantos deles são fracos contra cada tipo. Além disso, você pode compartilhar seu time no final.',
+    note: 'Por favor, note que apenas Pokémon suportados pelo Pokémon HOME estão disponíveis nesse site.',
     teamWeaknessesTitle: 'Fraquezas gerais do time:',
     teamWeaknessesDescription:
       'Descubra quantos Pokémon do seu time selecionado são fracos contra cada tipo.',
@@ -41,8 +42,8 @@ const portugueseDictionary = {
     error: 'Erro ao copiar!',
   },
   footer: {
-    donate: 'Se você quiser apoiar este projeto, considere fazer uma doação:',
-    issue: 'Encontrou algum bug? Abra um issue no GitHub:',
+    donate: 'Quer apoiar este projeto? ',
+    issue: 'Encontrou algum bug? ',
     copyright: '© de Azuxo Studio',
     nintendo: 'Pokémon é © da Nintendo',
   },
