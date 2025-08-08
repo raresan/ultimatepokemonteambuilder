@@ -35,6 +35,11 @@ const portugueseDictionary = {
     superEffective: 'Super eficaz (*2)',
     extremelyEffective: 'Extremamente eficaz (*4)',
   },
+  shareButton: {
+    share: 'Compartilhe seu Time',
+    copied: 'Copiado para sua área de transferência!',
+    error: 'Erro ao copiar!',
+  },
   footer: {
     line1:
       'Se você quiser apoiar este projeto, considere fazer uma doação aqui.',

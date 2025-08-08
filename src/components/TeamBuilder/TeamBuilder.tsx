@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Pokemon from '@/components/Pokemon/Pokemon'
 import TeamWeaknesses from '@/components/TeamWeaknesses/TeamWeaknesses'
+import ShareButton from '@/components/ShareButton/ShareButton'
 
 import { formatPokemonList } from '@/utils/formatPokemonList'
 import { buildQueryParams, parseQueryParams } from '@/utils/queryParams'
@@ -84,6 +85,8 @@ export default function TeamBuilder() {
       </div>
 
       <TeamWeaknesses team={team} />
+
+      <ShareButton />
     </main>
   )
 }

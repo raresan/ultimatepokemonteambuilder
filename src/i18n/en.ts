@@ -35,6 +35,11 @@ const englishDictionary = {
     superEffective: 'Super effective (*2)',
     extremelyEffective: 'Extremely effective (*4)',
   },
+  shareButton: {
+    share: 'Share your Team',
+    copied: 'Copied to your clipboard!',
+    error: 'Error while copying!',
+  },
   footer: {
     line1: 'If you want to support this project, consider donating here.',
     line2: 'Found any bugs? Please, open an issue in GitHub.',
