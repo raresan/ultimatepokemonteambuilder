@@ -8,13 +8,33 @@ export default function Footer() {
 
   return (
     <footer className='flex flex-col items-center gap-2 text-center mt-12 p-8 bg-zekrom'>
-      <p>{t('footer.line1')}</p>
-      <p>{t('footer.line2')}</p>
       <p>
-        {t('footer.line3')}, 2025-{currentYear}
+        {t('footer.donate')}
+
+        <a
+          href='https://www.paypal.com/donate/?hosted_button_id=9PB8UCMHVKE5L'
+          target='blank'
+          className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
+        >
+          Donate
+        </a>
       </p>
       <p>
-        {t('footer.line4')}, 1995-{currentYear}
+        {t('footer.issue')}
+
+        <a
+          href='https://github.com/ffrenzy7/poke-team-builder/issues'
+          target='blank'
+          className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
+        >
+          Issues
+        </a>
+      </p>
+      <p>
+        {t('footer.copyright')}, 2025-{currentYear}
+      </p>
+      <p>
+        {t('footer.nintendo')}, 1995-{currentYear}
       </p>
     </footer>
   )

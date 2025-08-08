@@ -41,10 +41,10 @@ const englishDictionary = {
     error: 'Error while copying!',
   },
   footer: {
-    line1: 'If you want to support this project, consider donating here.',
-    line2: 'Found any bugs? Please, open an issue in GitHub.',
-    line3: '© of Azuxo Studio',
-    line4: 'Pokémon is © of Nintendo',
+    donate: 'If you want to support this project, consider donating: ',
+    issue: 'Found any bugs? Please, open an issue in GitHub: ',
+    copyright: '© of Azuxo Studio',
+    nintendo: 'Pokémon is © of Nintendo',
   },
 }
 

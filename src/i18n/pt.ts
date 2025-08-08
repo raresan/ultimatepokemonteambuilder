@@ -41,11 +41,10 @@ const portugueseDictionary = {
     error: 'Erro ao copiar!',
   },
   footer: {
-    line1:
-      'Se você quiser apoiar este projeto, considere fazer uma doação aqui.',
-    line2: 'Encontrou algum bug? Abra uma issue no GitHub.',
-    line3: '© de Azuxo Studio',
-    line4: 'Pokémon é © da Nintendo',
+    donate: 'Se você quiser apoiar este projeto, considere fazer uma doação:',
+    issue: 'Encontrou algum bug? Abra um issue no GitHub:',
+    copyright: '© de Azuxo Studio',
+    nintendo: 'Pokémon é © da Nintendo',
   },
 }
 
