@@ -1,17 +1,25 @@
 const portugueseDictionary = {
   metadata: {
-    title: 'Construtor / Planejador de Times Pokémon Definitivo',
+    title: 'Monte / Planeje seu time Pokémon Definitivo',
     description:
-      'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
+      'Escolha seis Pokémon para sua equipe. Você pode ver as fraquezas, resistências, imunidades, e status base (incluindo o total) de cada um. Mais abaixo, você pode ver quantos deles são fracos contra cada tipo. Além disso, você pode compartilhar seu time no final.',
+    keywords:
+      'montar time pokemon, calcular fraquezas pokemon, montar time pokemon online, planejar time pokemon, fraquezas pokemon, planejar time pokemon online, multiplicadores de dano pokemon, resistencias pokemon, imunidades pokemon, status base pokemon, total status base pokemon, monte seu time pokemon, compartilhar time pokemon, comparacao pokemon brilhante, comparacao pokemon shiny, sons pokemon, porcentagem de dano pokemon, calcular dano pokemon',
+    shareImage: '', // TODO: add share image here (1200x630)
+    shareImageAlt:
+      'Monte seu time Pokémon Definitivo prévia: Compartilhe seu Time Perfeito!',
+    websiteUrl: 'https://renan-alonso-portfolio.vercel.app/index.html', // TODO: add site url here
+    websiteName: 'Monte seu time Pokémon Definitivo',
+    locale: 'pt_BR',
   },
   autocompleteInput: {
     notSupported: 'Desculpe! Seu browser não suporta reconhecimento por voz.',
     voiceLanguage: 'pt-BR',
   },
   teamBuilder: {
-    title: 'Construtor / Planejador de Times Definitivo',
+    title: 'Monte / Planeje seu time Pokémon Definitivo',
     description:
-      'Escolha seis Pokémon para sua equipe. Você poderá ver as fraquezas, resistências e imunidades de cada um.',
+      'Escolha seis Pokémon para sua equipe. Você pode ver as fraquezas, resistências, imunidades, e status base (incluindo o total) de cada um.',
     description2:
       'Mais abaixo, você pode ver quantos deles são fracos contra cada tipo. Além disso, você pode compartilhar seu time no final.',
     note: 'Por favor, note que apenas Pokémon suportados pelo Pokémon HOME estão disponíveis nesse site.',

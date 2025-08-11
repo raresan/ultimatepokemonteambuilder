@@ -2,16 +2,24 @@ const englishDictionary = {
   metadata: {
     title: 'Ultimate Pokémon Team Builder / Planner',
     description:
-      'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities. Down below, you can see how many of them are weak to each type.',
+      'Choose six Pokémon for your team. You can see their individual weaknesses, resistances, immunities, and base stats (including BST). Further down below, you can see how many of them are weak to each type. Also, you can share your team at the end.',
+    keywords:
+      'pokemon team builder, calculate pokemon team weaknesses, pokemon team builder online, pokemon team planner, pokemon weaknesses, pokemon team planner online, pokemon damage multipliers, pokemon resistances, pokemon immunities, pokemon base stats, pokemon base stat total, pokemon bst, share pokemon team, pokemon shiny toggle, all pokemon cry, pokemon damage percentage, calculate pokemon damage',
+    shareImage: '', // TODO: add share image here (1200x630)
+    shareImageAlt:
+      'Ultimate Pokémon Team Builder preview: Share your Perfect Team!',
+    websiteUrl: 'https://renan-alonso-portfolio.vercel.app/index.html', // TODO: add site url here
+    websiteName: 'Ultimate Pokémon Team Builder',
+    locale: 'en_US',
   },
   autocompleteInput: {
     notSupported: 'Sorry! Your browser does not support voice recognition.',
     voiceLanguage: 'en-US',
   },
   teamBuilder: {
-    title: 'Ultimate Team Builder / Planner',
+    title: 'Ultimate Pokémon Team Builder / Planner',
     description:
-      'Choose six Pokémon for your team. You can see their individual weaknesses, resistances and immunities.',
+      'Choose six Pokémon for your team. You can see their individual weaknesses, resistances, immunities, and base stats (including BST).',
     description2:
       'Further down below, you can see how many of them are weak to each type. Also, you can share your team at the end.',
     note: 'Please note that only Pokémon supported by Pokémon HOME are available on this website.',
