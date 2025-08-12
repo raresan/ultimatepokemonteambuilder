@@ -24,12 +24,12 @@ export default function ShareButton() {
   return (
     <button
       onClick={handleCopy}
-      className={`relative overflow-hidden px-4 py-2 w-100 text-2xl mt-12 rounded cursor-pointer ${
+      className={`relative overflow-hidden px-4 py-2 w-100 text-2xl mt-12 rounded cursor-pointer transition-colors duration-300 ${
         error
           ? 'bg-groudon text-foreground'
           : copied
           ? 'bg-rayquaza text-foreground'
-          : 'bg-foreground text-zekrom'
+          : 'bg-foreground text-zekrom animate-pulse hover:bg-indigo-500'
       }`}
     >
       {error

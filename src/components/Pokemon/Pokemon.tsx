@@ -111,7 +111,7 @@ export default function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden'
+      className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       <LoadingSpinner visible={loading} />
@@ -218,7 +218,7 @@ export default function Pokemon({
                 alt={pokemonData.name}
                 width={200}
                 height={200}
-                className='relative z-0'
+                className='relative z-0 group-hover:animate-soft-bounce'
               />
             </div>
 
@@ -241,7 +241,7 @@ export default function Pokemon({
             alt={'Pokéball'}
             width={100}
             height={100}
-            className='grayscale select-none'
+            className='grayscale select-none animate-wiggle origin-bottom'
             draggable='false'
           />
         </div>

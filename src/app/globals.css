@@ -14,6 +14,31 @@
   --gengar: #a53adf;
 }
 
+@theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-soft-bounce: soft-bounce 1s ease-in-out infinite;
+
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes soft-bounce {
+    0%,
+    100% {
+      transform: translateY(-6%);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -35,28 +35,29 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   return (
     <div className={`grid ${isPokemon ? 'grid-cols-3' : 'grid-cols-6'} gap-2`}>
       {Object.entries(data).map(([type, value]) => (
-        <div key={type} className=''>
-          <div className='flex items-center bg-darkrai gap-2 rounded-full pr-3'>
-            <div className='relative shrink-0'>
-              <Image
-                src={`/assets/images/${type}.png`}
-                alt={type}
-                width={80}
-                height={80}
-              />
-            </div>
-
-            {isPokemon ? (
-              <span
-                title={getMultiplierInfo(value).label}
-                className='grow-1 text-center text-[0.7rem]'
-              >
-                {getMultiplierInfo(value).icon}
-              </span>
-            ) : (
-              <span className='grow-1 text-center text-[0.7rem]'>{value}</span>
-            )}
+        <div
+          key={type}
+          className='flex items-center bg-darkrai gap-2 rounded-full pr-3 hover:scale-110 transition-transform ease-out duration-300 will-change-transform'
+          title={isPokemon ? getMultiplierInfo(value).label : undefined}
+        >
+          <div className='relative shrink-0'>
+            <Image
+              src={`/assets/images/${type}.png`}
+              alt={type}
+              width={80}
+              height={80}
+            />
           </div>
+
+          {isPokemon ? (
+            <span className='grow-1 text-center text-[0.7rem] select-none'>
+              {getMultiplierInfo(value).icon}
+            </span>
+          ) : (
+            <span className='grow-1 text-center text-[0.7rem] select-none'>
+              {value}
+            </span>
+          )}
         </div>
       ))}
     </div>
