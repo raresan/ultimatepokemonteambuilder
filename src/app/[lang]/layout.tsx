@@ -30,7 +30,7 @@ type I18nMeta = {
 const dictionaries: Record<string, I18nMeta> = { en, pt }
 
 interface Props {
-  params: { lang: string }
+  params: Promise<{ lang: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -97,7 +97,7 @@ export default async function LangLayout({
   params,
 }: Readonly<{
   children: React.ReactNode
-  params: { lang: string }
+  params: Props['params']
 }>) {
   const { lang } = await params
 

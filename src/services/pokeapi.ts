@@ -43,7 +43,7 @@ export async function getPokemon(name: string): Promise<PokemonData> {
     const data = await response.json()
 
     const types = await Promise.all(
-      data.types.map(async (type: any) => {
+      data.types.map(async (type: { type: { name: string } }) => {
         const damageRelations = await getTypeDamageRelations(type.type.name)
 
         return {

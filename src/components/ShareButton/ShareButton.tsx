@@ -15,7 +15,7 @@ export default function ShareButton() {
       await navigator.clipboard.writeText(window.location.href)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (error) {
+    } catch {
       setError(t('shareButton.error'))
       setTimeout(() => setError(null), 2000)
     }

@@ -32,8 +32,10 @@ export default function TeamBuilder() {
         const allPokemonUpdated = formatPokemonList(allPokemon)
 
         setPokemonList(allPokemonUpdated)
-      } catch (error: any) {
-        setError(error.message)
+      } catch (error: unknown) {
+        setError(
+          error instanceof Error ? error.message : 'Error loading Pokémon',
+        )
       } finally {
         setLoading(false)
       }
@@ -44,8 +46,12 @@ export default function TeamBuilder() {
         const teamFromParams = await parseQueryParams(searchParams)
 
         setTeam(teamFromParams)
-      } catch (error: any) {
-        setError(error.message)
+      } catch (error: unknown) {
+        setError(
+          error instanceof Error
+            ? error.message
+            : 'Error loading team from URL',
+        )
       } finally {
         setLoading(false)
       }
@@ -53,12 +59,12 @@ export default function TeamBuilder() {
 
     fetchAllPokemon()
     getTeamFromUrlParams()
-  }, [])
+  }, [searchParams])
 
   useEffect(() => {
     const queryParams = buildQueryParams(team)
     router.replace(`${pathname}?${queryParams}`, { scroll: false })
-  }, [team])
+  }, [pathname, router, team])
 
   const updateTeam = (pokemon: PokemonTeamMember, index: number) => {
     const updatedTeam = [...team]

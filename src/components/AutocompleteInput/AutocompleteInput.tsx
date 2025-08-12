@@ -17,11 +17,21 @@ interface ISpeechRecognition {
   stop(): void
   onstart: () => void
   onend: () => void
-  onresult: (event: any) => void
+  onresult: (event: SpeechRecognitionEvent) => void
 }
 
 type TSpeechRecognitionConstructor = {
   new (): ISpeechRecognition
+}
+
+interface SpeechRecognitionEvent {
+  results: {
+    [index: number]: {
+      [index: number]: {
+        transcript: string
+      }
+    }
+  }
 }
 
 declare global {
@@ -75,7 +85,7 @@ export default function AutocompleteInput({
         return { ...suggestion, imgUrl }
       })
       .filter((suggestion) => !erroredImagesCache.has(suggestion.imgUrl))
-  }, [filteredSuggestions, updateTrigger])
+  }, [filteredSuggestions, updateTrigger]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleImageError = (imgUrl: string) => {
     if (!erroredImagesCache.has(imgUrl)) {
@@ -101,7 +111,7 @@ export default function AutocompleteInput({
     recognition.onstart = () => setListening(true)
     recognition.onend = () => setListening(false)
 
-    recognition.onresult = (event: any) => {
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript: string = event.results[0][0].transcript
       onTypeName(transcript)
 
@@ -118,7 +128,7 @@ export default function AutocompleteInput({
     }
 
     recognitionRef.current = recognition
-  }, [suggestions, onTypeName, onClickName, fuse])
+  }, [suggestions, onTypeName, onClickName, fuse, t])
 
   const handleVoiceSearch = () => {
     if (listening) {

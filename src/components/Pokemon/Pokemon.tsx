@@ -50,7 +50,7 @@ export default function Pokemon({
     }
 
     onUpdate(updatedPokemon, index)
-  }, [pokemonData, shiny])
+  }, [pokemonData, shiny]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const audio = useRef<HTMLAudioElement>(new Audio())
 
@@ -64,8 +64,8 @@ export default function Pokemon({
     try {
       const pokemon = await getPokemon(name)
       return pokemon
-    } catch (error: any) {
-      setError(error.message)
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : 'Unknown error')
     }
   }
 
@@ -91,9 +91,10 @@ export default function Pokemon({
           setPokemonData(data)
           playAudio(data.cries.latest || data.cries.legacy, 0.1)
         }
-      } catch (err: any) {
-        // já tratado em fetchPokemon, mas caso queira:
-        setError(err?.message || 'Erro ao buscar Pokémon')
+      } catch (error: unknown) {
+        setError(
+          error instanceof Error ? error.message : 'Error fetching Pokémon',
+        )
       } finally {
         setLoading(false)
       }
@@ -198,6 +199,7 @@ export default function Pokemon({
 
           <div className='flex gap-4 w-full'>
             <div className='relative basis-1/2'>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/assets/gif/shiny.gif?t=${
                   shiny && !hasAnimatedShiny ? Date.now() : undefined
