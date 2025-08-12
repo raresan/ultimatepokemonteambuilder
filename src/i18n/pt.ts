@@ -13,6 +13,7 @@ const portugueseDictionary = {
     locale: 'pt_BR',
   },
   autocompleteInput: {
+    title: 'Pesquisa por voz',
     notSupported: 'Desculpe! Seu browser não suporta reconhecimento por voz.',
     voiceLanguage: 'pt-BR',
   },

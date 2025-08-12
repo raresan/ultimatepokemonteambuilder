@@ -6,6 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import Pokemon from '@/components/Pokemon/Pokemon'
 import TeamWeaknesses from '@/components/TeamWeaknesses/TeamWeaknesses'
 import ShareButton from '@/components/ShareButton/ShareButton'
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
 
 import { formatPokemonList } from '@/utils/formatPokemonList'
 import { buildQueryParams, parseQueryParams } from '@/utils/queryParams'
@@ -67,11 +68,13 @@ export default function TeamBuilder() {
     setTeam(updatedTeam)
   }
 
-  if (loading) return <div className='p-4'>Loading...</div>
+  // if (loading) return <div className='p-4'>Loading...</div>
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
 
   return (
     <main className='min-h-screen flex flex-col items-center px-8'>
+      <LoadingSpinner visible={loading} fullscreen />
+
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>
         {team?.map((teamMember, index) => (
           <Pokemon

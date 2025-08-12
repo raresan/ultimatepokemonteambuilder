@@ -13,6 +13,7 @@ const englishDictionary = {
     locale: 'en_US',
   },
   autocompleteInput: {
+    title: 'Voice search',
     notSupported: 'Sorry! Your browser does not support voice recognition.',
     voiceLanguage: 'en-US',
   },

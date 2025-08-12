@@ -141,6 +141,7 @@ export default function AutocompleteInput({
         />
 
         <button
+          title={t('autocompleteInput.title')}
           type='button'
           onClick={handleVoiceSearch}
           className={`h-full aspect-square p-2 transition-opacity duration-300 focus:outline-none absolute top-0 right-0 cursor-pointer ${

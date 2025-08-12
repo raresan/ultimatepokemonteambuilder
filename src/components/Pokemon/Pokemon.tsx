@@ -6,6 +6,7 @@ import Image from 'next/image'
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import BaseStats from '@/components/BaseStats/BaseStats'
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
 
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
 import { getBorderColors } from '@/utils/getBorderColors'
@@ -38,6 +39,7 @@ export default function Pokemon({
     pokemonData?.name || '',
   )
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState<boolean>(false) // novo
 
   const t = useTranslations()
 
@@ -80,12 +82,20 @@ export default function Pokemon({
     )
 
     if (matched) {
-      const data = await fetchPokemon(matched.name)
+      try {
+        setLoading(true)
+        const data = await fetchPokemon(matched.name)
 
-      if (data) {
-        setShiny(false)
-        setPokemonData(data)
-        playAudio(data.cries.latest || data.cries.legacy, 0.1)
+        if (data) {
+          setShiny(false)
+          setPokemonData(data)
+          playAudio(data.cries.latest || data.cries.legacy, 0.1)
+        }
+      } catch (err: any) {
+        // já tratado em fetchPokemon, mas caso queira:
+        setError(err?.message || 'Erro ao buscar Pokémon')
+      } finally {
+        setLoading(false)
       }
     }
   }
@@ -101,9 +111,11 @@ export default function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300'
+      className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
+      <LoadingSpinner visible={loading} />
+
       <div className='flex justify-between'>
         <label className='font-bold'>#{index + 1} Pokémon</label>
 
