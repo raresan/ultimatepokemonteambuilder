@@ -28,6 +28,11 @@ export default function BaseStats({ pokemonData }: BaseStatsProps) {
       <h3 className='font-bold'>{t('pokemon.baseStatsTitle')}</h3>
 
       {pokemonData.stats.map((stat, index) => {
+        // RESETTING COUNT TO ZERO IN THE FIRST ITERATION
+        if (index === 0) {
+          baseStatTotal.current = 0
+        }
+
         baseStatTotal.current += stat.base_stat
 
         return (
