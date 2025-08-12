@@ -14,7 +14,7 @@ export default function Header() {
         alt={'Pokémon Logo'}
         width={450}
         height={150}
-        className='invert select-none'
+        className='select-none'
         draggable='false'
       />
 

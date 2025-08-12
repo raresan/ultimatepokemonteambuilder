@@ -5,10 +5,10 @@ const englishDictionary = {
       'Choose six Pokémon for your team. You can see their individual weaknesses, resistances, immunities, and base stats (including BST). Further down below, you can see how many of them are weak to each type. Also, you can share your team at the end.',
     keywords:
       'pokemon team builder, calculate pokemon team weaknesses, pokemon team builder online, pokemon team planner, pokemon weaknesses, pokemon team planner online, pokemon damage multipliers, pokemon resistances, pokemon immunities, pokemon base stats, pokemon base stat total, pokemon bst, share pokemon team, pokemon shiny toggle, all pokemon cry, pokemon damage percentage, calculate pokemon damage',
-    shareImage: '', // TODO: add share image here (1200x630)
+    shareImage: '/images/og-image_en.png',
     shareImageAlt:
       'Ultimate Pokémon Team Builder preview: Share your Perfect Team!',
-    websiteUrl: 'https://renan-alonso-portfolio.vercel.app/index.html', // TODO: add site url here
+    websiteUrl: 'https://ultimatepokemonteambuilder.vercel.app/en',
     websiteName: 'Ultimate Pokémon Team Builder',
     locale: 'en_US',
   },
@@ -28,6 +28,9 @@ const englishDictionary = {
       'Find how many Pokémon from your selected team are weak to each type.',
   },
   pokemon: {
+    shiny: 'Shiny',
+    cry: 'Cry',
+    clear: 'Clear',
     baseStatsTitle: 'Base Stats:',
     baseStatSpecial: 'sp.',
     baseStatAttack: 'atk',

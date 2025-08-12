@@ -110,6 +110,7 @@ export default function Pokemon({
         {pokemonData && (
           <ul className='flex gap-2 items-center'>
             <li
+              title={t('pokemon.shiny')}
               onClick={() => {
                 setShiny((previous) => {
                   const newShiny = !previous
@@ -135,6 +136,7 @@ export default function Pokemon({
             <li className='w-[1px] h-3 bg-foreground opacity-10' />
 
             <li
+              title={t('pokemon.cry')}
               onClick={() =>
                 playAudio(
                   pokemonData.cries.latest || pokemonData.cries.legacy,
@@ -149,6 +151,7 @@ export default function Pokemon({
             <li className='w-[1px] h-3 bg-foreground opacity-10' />
 
             <li
+              title={t('pokemon.clear')}
               onClick={handleClear}
               className='transition-opacity duration-300 cursor-pointer hover:opacity-50 active:opacity-100'
             >
