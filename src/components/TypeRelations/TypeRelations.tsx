@@ -33,11 +33,15 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   }
 
   return (
-    <div className={`grid ${isPokemon ? 'grid-cols-3' : 'grid-cols-6'} gap-2`}>
+    <div
+      className={`grid gap-2 mx-auto  ${
+        isPokemon ? 'grid-cols-3' : 'grid-cols-3 md:grid-cols-6 xl:grid-cols-9'
+      }`}
+    >
       {Object.entries(data).map(([type, value]) => (
         <div
           key={type}
-          className='flex items-center bg-darkrai gap-2 rounded-full pr-3 hover:scale-110 transition-transform ease-out duration-300 will-change-transform'
+          className='flex items-center bg-darkrai gap-1.5 rounded-full pr-2 hover:scale-110 transition-transform ease-out duration-300 will-change-transform md:(gap-2 pr-3)'
           title={isPokemon ? getMultiplierInfo(value).label : undefined}
         >
           <div className='relative shrink-0'>
@@ -50,7 +54,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
           </div>
 
           {isPokemon ? (
-            <span className='grow-1 text-center text-[0.7rem] select-none'>
+            <span className='grow-1 text-center text-[0.6rem] md:text-[0.7rem] select-none'>
               {getMultiplierInfo(value).icon}
             </span>
           ) : (

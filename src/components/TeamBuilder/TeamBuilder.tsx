@@ -78,7 +78,7 @@ export default function TeamBuilder() {
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
 
   return (
-    <main className='min-h-screen flex flex-col items-center px-8'>
+    <main className='min-h-screen flex flex-col items-center px-4 md:px-8'>
       <LoadingSpinner visible={loading} fullscreen />
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 w-full max-w-7xl'>

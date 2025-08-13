@@ -112,7 +112,7 @@ export default function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group'
+      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       <LoadingSpinner visible={loading} />

@@ -50,7 +50,7 @@ const portugueseDictionary = {
   },
   shareButton: {
     share: 'Compartilhe seu Time',
-    copied: 'Copiado para sua área de transferência!',
+    copied: 'Copiado para área de transferência!',
     error: 'Erro ao copiar!',
   },
   footer: {
