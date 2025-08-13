@@ -20,9 +20,9 @@ export default function Header() {
         alt={'Pokémon Logo'}
         width={450}
         height={150}
-        className='select-none'
         draggable='false'
         onClick={handleClear}
+        className='select-none cursor-pointer'
       />
 
       <h1 className='text-3xl font-bold'>
