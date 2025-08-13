@@ -18,7 +18,10 @@ export default function Header() {
         draggable='false'
       />
 
-      <h1 className='text-3xl font-bold'>{t('teamBuilder.title')}</h1>
+      <h1 className='text-3xl font-bold'>
+        {t('teamBuilder.title')}{' '}
+        <span className='text-red-400'>(Beta v1.0)</span>
+      </h1>
 
       <div className='text-center'>
         <p>{t('teamBuilder.description')}</p>

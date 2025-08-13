@@ -19,6 +19,7 @@ export default function Footer() {
           PayPal
         </a>
       </p>
+
       <p>
         {t('footer.issue')}
 
@@ -30,9 +31,23 @@ export default function Footer() {
           GitHub Issues
         </a>
       </p>
+
+      <p>
+        {t('footer.data')}
+
+        <a
+          href='https://pokeapi.co/'
+          target='blank'
+          className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
+        >
+          PokéAPI
+        </a>
+      </p>
+
       <p>
         {t('footer.copyright')}, 2025-{currentYear}
       </p>
+
       <p>
         {t('footer.nintendo')}, 1995-{currentYear}
       </p>
