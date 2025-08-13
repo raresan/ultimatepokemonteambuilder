@@ -31,7 +31,7 @@ export default function Pokemon({
   onUpdate,
 }: PokemonProps) {
   const [shiny, setShiny] = useState<boolean>(pokemon.shiny)
-  const [hasAnimatedShiny, setHasAnimatedShiny] = useState<boolean>(false)
+  // const [hasAnimatedShiny, setHasAnimatedShiny] = useState<boolean>(false)
   const [pokemonData, setPokemonData] = useState<PokemonData | undefined>(
     pokemon.data,
   )
@@ -124,19 +124,20 @@ export default function Pokemon({
             <li
               title={t('pokemon.shiny')}
               onClick={() => {
-                setShiny((previous) => {
-                  const newShiny = !previous
+                // setShiny((previous) => {
+                //   const newShiny = !previous
 
-                  if (newShiny) {
-                    playAudio('/assets/audio/shiny.mp3', 0.2)
-                  }
+                //   if (newShiny) {
+                //     playAudio('/assets/audio/shiny.mp3', 0.2)
+                //   }
 
-                  setTimeout(() => {
-                    setHasAnimatedShiny(newShiny)
-                  }, 1000)
+                //   setTimeout(() => {
+                //     setHasAnimatedShiny(newShiny)
+                //   }, 1000)
 
-                  return newShiny
-                })
+                //   return newShiny
+                // })
+                setShiny((previous) => !previous)
               }}
               className={`transition-colors duration-300 cursor-pointer hover:text-charizard ${
                 shiny && 'text-groudon'
@@ -198,8 +199,7 @@ export default function Pokemon({
 
           <div className='flex gap-4 w-full'>
             <div className='relative basis-1/2'>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              {/* <img
                 src={`/assets/gif/shiny.gif?t=${
                   shiny && !hasAnimatedShiny ? Date.now() : undefined
                 }`}
@@ -208,7 +208,7 @@ export default function Pokemon({
                 style={{
                   display: shiny && !hasAnimatedShiny ? 'block' : 'none',
                 }}
-              />
+              /> */}
 
               <Image
                 src={
