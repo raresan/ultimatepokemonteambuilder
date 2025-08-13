@@ -89,7 +89,6 @@ export default function Pokemon({
         if (data) {
           setShiny(false)
           setPokemonData(data)
-          playAudio(data.cries.latest || data.cries.legacy, 0.1)
         }
       } catch (error: unknown) {
         setError(
