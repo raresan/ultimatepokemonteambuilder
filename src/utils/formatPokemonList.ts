@@ -10,7 +10,7 @@ export const formatPokemonList = (allPokemon: PokemonOption[]) => {
     const firstName = firstLetterUppercase[0]
     const slicedLastNames = firstLetterUppercase.slice(1)
     const lastName = slicedLastNames.join(' ')
-    const lastNameFormatted = lastName.length ? ` (${lastName})` : ''
+    const lastNameFormatted = lastName.length ? ` ${lastName}` : ''
     const formattedName = firstName + lastNameFormatted
 
     return {
