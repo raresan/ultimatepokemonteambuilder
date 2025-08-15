@@ -62,6 +62,9 @@ const AutocompleteInput = memo(function AutocompleteInput({
   const [updateTrigger, setUpdateTrigger] = useState(0)
   const [listening, setListening] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
+  const [speechRecognitionSupported, setSpeechRecognitionSupported] =
+    useState(false)
+
   const listRef = useRef<HTMLUListElement>(null)
 
   const t = useTranslations()
@@ -105,10 +108,9 @@ const AutocompleteInput = memo(function AutocompleteInput({
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition
 
-    if (!SpeechRecognition) {
-      alert(t('autocompleteInput.notSupported'))
-      return
-    }
+    if (!SpeechRecognition) return
+
+    setSpeechRecognitionSupported(true)
 
     const recognition = new SpeechRecognition()
     recognition.lang = t('autocompleteInput.voiceLanguage')
@@ -164,20 +166,22 @@ const AutocompleteInput = memo(function AutocompleteInput({
           className='w-full h-full bg-background rounded px-3 py-2 mt-2 mb-2 focus:outline-none focus:ring-2 focus:ring-foreground'
         />
 
-        <button
-          title={t('autocompleteInput.title')}
-          type='button'
-          onClick={handleVoiceSearch}
-          className={`h-full aspect-square p-2 transition-opacity duration-300 focus:outline-none absolute top-0 right-0 cursor-pointer ${
-            !listening && 'opacity-50 hover:hover:opacity-100'
-          }`}
-        >
-          {listening ? (
-            <HearingIcon className='text-red-400 animate-pulse' />
-          ) : (
-            <MicIcon />
-          )}
-        </button>
+        {speechRecognitionSupported && (
+          <button
+            title={t('autocompleteInput.title')}
+            type='button'
+            onClick={handleVoiceSearch}
+            className={`h-full aspect-square p-2 transition-opacity duration-300 focus:outline-none absolute top-0 right-0 cursor-pointer ${
+              !listening && 'opacity-50 hover:hover:opacity-100'
+            }`}
+          >
+            {listening ? (
+              <HearingIcon className='text-red-400 animate-pulse' />
+            ) : (
+              <MicIcon />
+            )}
+          </button>
+        )}
       </div>
 
       {showSuggestions && suggestionsWithImages.length > 0 && (
