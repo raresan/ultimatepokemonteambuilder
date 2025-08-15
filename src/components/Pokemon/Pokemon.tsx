@@ -53,6 +53,20 @@ const Pokemon = memo(function Pokemon({
     onUpdate(updatedPokemon, index)
   }, [pokemonData, shiny]) // eslint-disable-line react-hooks/exhaustive-deps
 
+  // FORMAT POKEMON NAME WHEN LOADED FROM URL
+  useEffect(() => {
+    if (pokemonData && pokemonList.length > 0) {
+      const matchedPokemon = pokemonList.find(
+        (pokemon) =>
+          pokemon.name.toLowerCase() === pokemonData.name.toLowerCase(),
+      )
+
+      if (matchedPokemon) {
+        setPokemonNameSearch(matchedPokemon.formattedName)
+      }
+    }
+  }, [pokemonData, pokemonList])
+
   const audio = useRef<HTMLAudioElement>(new Audio())
 
   const playAudio = (src: string, volume: number) => {
