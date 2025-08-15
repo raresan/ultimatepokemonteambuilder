@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback, memo } from 'react'
 import Image from 'next/image'
 
 import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
@@ -24,7 +24,7 @@ type PokemonProps = {
   onUpdate: (pokemon: PokemonTeamMember, index: number) => void
 }
 
-export default function Pokemon({
+const Pokemon = memo(function Pokemon({
   index,
   pokemon,
   pokemonList,
@@ -69,44 +69,47 @@ export default function Pokemon({
     }
   }
 
-  const onTypeName = async (name: string) => {
+  const onTypeName = useCallback((name: string) => {
     setPokemonNameSearch(name)
-  }
+  }, [])
 
-  const onClickName = async (pokemonInfo: PokemonOption) => {
-    setPokemonNameSearch(pokemonInfo.formattedName)
+  const onClickName = useCallback(
+    async (pokemonInfo: PokemonOption) => {
+      setPokemonNameSearch(pokemonInfo.formattedName)
 
-    const matched = pokemonList.find(
-      (pokemon) =>
-        pokemon.name.toLowerCase() === pokemonInfo.name.toLowerCase(),
-    )
+      const matched = pokemonList.find(
+        (pokemon) =>
+          pokemon.name.toLowerCase() === pokemonInfo.name.toLowerCase(),
+      )
 
-    if (matched) {
-      try {
-        setLoading(true)
-        const data = await fetchPokemon(matched.name)
+      if (matched) {
+        try {
+          setLoading(true)
+          const data = await fetchPokemon(matched.name)
 
-        if (data) {
-          setShiny(false)
-          setPokemonData(data)
+          if (data) {
+            setShiny(false)
+            setPokemonData(data)
+          }
+        } catch (error: unknown) {
+          setError(
+            error instanceof Error ? error.message : 'Error fetching Pokémon',
+          )
+        } finally {
+          setLoading(false)
         }
-      } catch (error: unknown) {
-        setError(
-          error instanceof Error ? error.message : 'Error fetching Pokémon',
-        )
-      } finally {
-        setLoading(false)
       }
-    }
-  }
+    },
+    [pokemonList],
+  )
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setPokemonNameSearch('')
     setShiny(false)
     setPokemonData(undefined)
 
     onUpdate({ data: undefined, shiny: false }, index)
-  }
+  }, [onUpdate, index])
 
   return (
     <div
@@ -249,4 +252,6 @@ export default function Pokemon({
       )}
     </div>
   )
-}
+})
+
+export default Pokemon

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import Pokemon from '@/components/Pokemon/Pokemon'
@@ -20,11 +20,14 @@ export default function TeamBuilder() {
   const [error, setError] = useState<string | null>(null)
   const [pokemonList, setPokemonList] = useState<PokemonOption[]>([])
   const [team, setTeam] = useState<PokemonTeamMember[]>([])
+  const [initialLoadDone, setInitialLoadDone] = useState<boolean>(false)
 
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
+  const isUpdatingUrl = useRef<boolean>(false)
 
+  // LOAD POKEMON LIST ONLY ONCE
   useEffect(() => {
     async function fetchAllPokemon() {
       try {
@@ -41,6 +44,13 @@ export default function TeamBuilder() {
       }
     }
 
+    fetchAllPokemon()
+  }, [])
+
+  // LOAD TEAM FROM URL PARAMS ONLY ON INITIAL LOAD
+  useEffect(() => {
+    if (initialLoadDone || isUpdatingUrl.current) return
+
     async function getTeamFromUrlParams() {
       try {
         const teamFromParams = await parseQueryParams(searchParams)
@@ -53,26 +63,41 @@ export default function TeamBuilder() {
             : 'Error loading team from URL',
         )
       } finally {
-        setLoading(false)
+        setInitialLoadDone(true)
       }
     }
 
-    fetchAllPokemon()
     getTeamFromUrlParams()
-  }, [searchParams])
+  }, [searchParams, initialLoadDone])
 
+  // UPDATE URL ONLY WHEN TEAM CHANGES (NOT ON INITIAL LOAD)
   useEffect(() => {
+    if (!initialLoadDone) return
+
+    isUpdatingUrl.current = true
+
     const queryParams = buildQueryParams(team)
+
     router.replace(`${pathname}?${queryParams}`, { scroll: false })
-  }, [pathname, router, team])
 
-  const updateTeam = (pokemon: PokemonTeamMember, index: number) => {
-    const updatedTeam = [...team]
+    // RESET FLAG AFTER URL UPDATE
+    setTimeout(() => {
+      isUpdatingUrl.current = false
+    }, 100)
+  }, [team, pathname, router, initialLoadDone])
 
-    updatedTeam[index] = pokemon
+  const updateTeam = useCallback(
+    (pokemon: PokemonTeamMember, index: number) => {
+      setTeam((prevTeam) => {
+        const updatedTeam = [...prevTeam]
 
-    setTeam(updatedTeam)
-  }
+        updatedTeam[index] = pokemon
+
+        return updatedTeam
+      })
+    },
+    [],
+  )
 
   // if (loading) return <div className='p-4'>Loading...</div>
   if (error) return <div className='p-4 text-red-500'>Error: {error}</div>

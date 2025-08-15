@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, memo } from 'react'
 
 import useTranslations from '@/hooks/useTranslations'
 
@@ -18,7 +18,7 @@ type BaseStatsProps = {
   pokemonData: PokemonData
 }
 
-export default function BaseStats({ pokemonData }: BaseStatsProps) {
+const BaseStats = memo(function BaseStats({ pokemonData }: BaseStatsProps) {
   const t = useTranslations()
 
   const baseStatTotal = useRef<number>(0)
@@ -92,4 +92,6 @@ export default function BaseStats({ pokemonData }: BaseStatsProps) {
       </div>
     </div>
   )
-}
+})
+
+export default BaseStats

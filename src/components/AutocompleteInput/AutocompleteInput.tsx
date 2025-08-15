@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect, useRef } from 'react'
+import { useState, useMemo, useEffect, useRef, memo, useCallback } from 'react'
 import Fuse from 'fuse.js'
 
 import { erroredImagesCache } from '@/utils/erroredImagesCache'
@@ -52,7 +52,7 @@ type Props = {
   onClickName: (pokemonInfo: PokemonOption) => void
 }
 
-export default function AutocompleteInput({
+const AutocompleteInput = memo(function AutocompleteInput({
   value,
   suggestions,
   onTypeName,
@@ -137,20 +137,20 @@ export default function AutocompleteInput({
     recognitionRef.current = recognition
   }, [suggestions, onTypeName, onClickName, fuse, t])
 
-  const handleImageError = (imgUrl: string) => {
+  const handleImageError = useCallback((imgUrl: string) => {
     if (!erroredImagesCache.has(imgUrl)) {
       erroredImagesCache.add(imgUrl)
       setUpdateTrigger((trigger) => trigger + 1)
     }
-  }
+  }, [])
 
-  const handleVoiceSearch = () => {
+  const handleVoiceSearch = useCallback(() => {
     if (listening) {
       recognitionRef.current?.stop()
     } else {
       recognitionRef.current?.start()
     }
-  }
+  }, [listening])
 
   return (
     <div className='relative'>
@@ -193,4 +193,6 @@ export default function AutocompleteInput({
       )}
     </div>
   )
-}
+})
+
+export default AutocompleteInput
