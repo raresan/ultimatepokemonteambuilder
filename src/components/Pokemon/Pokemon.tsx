@@ -142,7 +142,7 @@ const Pokemon = memo(function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group'
+      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group min-h-140 flex flex-col'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       <LoadingSpinner visible={loading} />
@@ -169,7 +169,7 @@ const Pokemon = memo(function Pokemon({
             onPlayCry={() =>
               playAudio(
                 pokemonData.cries.latest || pokemonData.cries.legacy,
-                0.1,
+                0.03,
               )
             }
             onClear={handleClear}
@@ -187,7 +187,7 @@ const Pokemon = memo(function Pokemon({
       {error && <div className='p-4 text-red-500'>Error: {error}</div>}
 
       {pokemonData ? (
-        <div className='mt-4 flex flex-col items-center'>
+        <div className='mt-4 flex flex-col grow-1 items-center justify-between'>
           <div className='flex gap-2 mb-2'>
             {pokemonData.types.map((type) => (
               <Image
@@ -233,15 +233,18 @@ const Pokemon = memo(function Pokemon({
                     onPlay={() => {
                       const canvas = canvasRef.current
                       const video = videoRef.current
+
                       if (!canvas || !video) return
 
                       const ctx = canvas.getContext('2d')
+
                       if (!ctx) return
 
                       const processFrame = () => {
                         if (video.paused || video.ended) return
 
                         ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+
                         const imageData = ctx.getImageData(
                           0,
                           0,
@@ -298,7 +301,7 @@ const Pokemon = memo(function Pokemon({
           </div>
         </div>
       ) : (
-        <div className='flex-1 flex items-center justify-center min-h-[450px]'>
+        <div className='grow-1 flex items-center justify-center'>
           <Image
             src={'/assets/images/pokeball.png'}
             alt={'Pokéball'}
