@@ -63,7 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: dictionary.metadata.websiteName,
       images: [
         {
-          url: dictionary.metadata.shareImage,
+          url: new URL(dictionary.metadata.shareImage, dictionary.metadata.websiteUrl).toString(),
           width: 1200,
           height: 630,
           alt: dictionary.metadata.shareImageAlt,
@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: dictionary.metadata.title,
       description: dictionary.metadata.description,
-      images: dictionary.metadata.shareImage,
+      images: new URL(dictionary.metadata.shareImage, dictionary.metadata.websiteUrl).toString(),
       creator,
     },
     robots: {
