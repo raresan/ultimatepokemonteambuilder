@@ -5,7 +5,7 @@ const portugueseDictionary = {
       'Escolha seis Pokémon para sua equipe. Você pode ver as fraquezas, resistências, imunidades, e status base (incluindo o total) de cada um. Mais abaixo, você pode ver quantos deles são fracos contra cada tipo. Além disso, você pode compartilhar seu time no final.',
     keywords:
       'montar time pokemon, calcular fraquezas pokemon, montar time pokemon online, planejar time pokemon, fraquezas pokemon, planejar time pokemon online, multiplicadores de dano pokemon, resistencias pokemon, imunidades pokemon, status base pokemon, total status base pokemon, monte seu time pokemon, compartilhar time pokemon, comparacao pokemon brilhante, comparacao pokemon shiny, sons pokemon, porcentagem de dano pokemon, calcular dano pokemon',
-    shareImage: '/images/og-image_pt.png',
+    shareImage: '/assets/images/og-image_pt.png',
     shareImageAlt:
       'Monte seu time Pokémon Definitivo prévia: Compartilhe seu Time Perfeito!',
     websiteUrl: 'https://ultimatepokemonteambuilder.vercel.app/pt',
