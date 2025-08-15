@@ -181,6 +181,7 @@ export default function AutocompleteInput({
                 width={80}
                 height={80}
                 unoptimized
+                loading='lazy'
                 onError={() => handleImageError(suggestion.imgUrl)}
               />
 
