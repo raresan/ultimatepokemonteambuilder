@@ -19,10 +19,12 @@ export default function Header() {
         src={'/assets/images/pokemon-logo.png'}
         alt={'Pokémon Logo'}
         width={450}
-        height={150}
+        height={215}
+        priority
         draggable='false'
         onClick={handleClear}
         className='select-none cursor-pointer'
+        style={{ width: 'auto', height: 'auto' }}
       />
 
       <h1 className='text-3xl font-bold'>

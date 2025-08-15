@@ -1,13 +1,17 @@
 'use client'
 
 import { useState, useMemo, useEffect, useRef } from 'react'
-import Image from 'next/image'
-import type { PokemonOption } from '@/types'
-import { erroredImagesCache } from '@/utils/erroredImagesCache'
 import Fuse from 'fuse.js'
+
+import { erroredImagesCache } from '@/utils/erroredImagesCache'
+
 import useTranslations from '@/hooks/useTranslations'
+
+import VirtualizedList from '@/components/VirtualizedList/VirtualizedList'
 import MicIcon from '@/components/Icons/MicIcon'
 import HearingIcon from '@/components/Icons/HearingIcon'
+
+import type { PokemonOption } from '@/types'
 
 interface ISpeechRecognition {
   lang: string
@@ -57,6 +61,8 @@ export default function AutocompleteInput({
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [updateTrigger, setUpdateTrigger] = useState(0)
   const [listening, setListening] = useState(false)
+  const [scrollTop, setScrollTop] = useState(0)
+  const listRef = useRef<HTMLUListElement>(null)
 
   const t = useTranslations()
 
@@ -87,12 +93,13 @@ export default function AutocompleteInput({
       .filter((suggestion) => !erroredImagesCache.has(suggestion.imgUrl))
   }, [filteredSuggestions, updateTrigger]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleImageError = (imgUrl: string) => {
-    if (!erroredImagesCache.has(imgUrl)) {
-      erroredImagesCache.add(imgUrl)
-      setUpdateTrigger((trigger) => trigger + 1)
+  // RESET SCROLL WHEN SUGGESTIONS CHANGE
+  useEffect(() => {
+    if (showSuggestions && listRef.current) {
+      listRef.current.scrollTop = 0
+      setScrollTop(0)
     }
-  }
+  }, [showSuggestions, suggestionsWithImages])
 
   useEffect(() => {
     const SpeechRecognition =
@@ -130,6 +137,13 @@ export default function AutocompleteInput({
     recognitionRef.current = recognition
   }, [suggestions, onTypeName, onClickName, fuse, t])
 
+  const handleImageError = (imgUrl: string) => {
+    if (!erroredImagesCache.has(imgUrl)) {
+      erroredImagesCache.add(imgUrl)
+      setUpdateTrigger((trigger) => trigger + 1)
+    }
+  }
+
   const handleVoiceSearch = () => {
     if (listening) {
       recognitionRef.current?.stop()
@@ -163,31 +177,18 @@ export default function AutocompleteInput({
       </div>
 
       {showSuggestions && suggestionsWithImages.length > 0 && (
-        <ul className='absolute z-10 bg-background border border-darkrai rounded w-full max-h-80 overflow-y-auto'>
-          {suggestionsWithImages.map((suggestion) => (
-            <li
-              key={suggestion.name}
-              className='px-3 py-2 hover:bg-darkrai cursor-pointer flex items-center gap-4'
-              onMouseDown={(event) => {
-                event.preventDefault()
-
-                onClickName(suggestion)
-                setShowSuggestions(false)
-              }}
-            >
-              <Image
-                src={suggestion.imgUrl}
-                alt={suggestion.name}
-                width={80}
-                height={80}
-                unoptimized
-                loading='lazy'
-                onError={() => handleImageError(suggestion.imgUrl)}
-              />
-
-              <span>{suggestion.formattedName}</span>
-            </li>
-          ))}
+        <ul
+          ref={listRef}
+          className='absolute z-10 bg-background border border-darkrai rounded w-full max-h-80 overflow-y-auto'
+          onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
+        >
+          <VirtualizedList
+            items={suggestionsWithImages}
+            scrollTop={scrollTop}
+            onClickName={onClickName}
+            setShowSuggestions={setShowSuggestions}
+            handleImageError={handleImageError}
+          />
         </ul>
       )}
     </div>

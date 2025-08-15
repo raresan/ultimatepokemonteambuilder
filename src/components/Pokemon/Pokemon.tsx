@@ -192,7 +192,7 @@ export default function Pokemon({
                 src={`/assets/images/${type.name}.png`}
                 alt={type.name}
                 width={100}
-                height={100}
+                height={20}
               />
             ))}
           </div>

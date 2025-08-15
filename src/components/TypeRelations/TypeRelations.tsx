@@ -49,7 +49,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
               src={`/assets/images/${type}.png`}
               alt={type}
               width={80}
-              height={80}
+              height={16}
             />
           </div>
 
