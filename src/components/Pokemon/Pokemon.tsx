@@ -196,6 +196,7 @@ const Pokemon = memo(function Pokemon({
                 alt={type.name}
                 width={100}
                 height={20}
+                className='select-none'
               />
             ))}
           </div>
@@ -211,7 +212,7 @@ const Pokemon = memo(function Pokemon({
                 alt={pokemonData.name}
                 width={200}
                 height={200}
-                className='relative z-0 group-hover:animate-soft-bounce'
+                className='relative z-0 group-hover:animate-soft-bounce select-none'
               />
 
               {/* SHINY SPARKLES WITH CANVAS CHROMA KEY */}

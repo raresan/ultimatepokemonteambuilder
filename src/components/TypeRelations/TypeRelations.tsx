@@ -91,7 +91,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
                 alt={type}
                 width={80}
                 height={16}
-                // className='w-auto h-auto'
+                className='select-none'
               />
             </div>
 
