@@ -168,7 +168,12 @@ export default function AutocompleteInput({
             <li
               key={suggestion.name}
               className='px-3 py-2 hover:bg-darkrai cursor-pointer flex items-center gap-4'
-              onPointerDown={() => onClickName(suggestion)}
+              onMouseDown={(event) => {
+                event.preventDefault()
+
+                onClickName(suggestion)
+                setShowSuggestions(false)
+              }}
             >
               <Image
                 src={suggestion.imgUrl}
