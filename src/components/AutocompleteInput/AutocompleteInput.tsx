@@ -172,7 +172,11 @@ const AutocompleteInput = memo(function AutocompleteInput({
             !listening && 'opacity-50 hover:opacity-100'
           }`}
         >
-          {listening ? <HearingIcon className='text-groudon' /> : <MicIcon />}
+          {listening ? (
+            <HearingIcon className='text-red-400 animate-pulse' />
+          ) : (
+            <MicIcon />
+          )}
         </button>
       </div>
 

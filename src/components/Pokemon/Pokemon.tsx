@@ -7,6 +7,7 @@ import AutocompleteInput from '@/components/AutocompleteInput/AutocompleteInput'
 import TypeRelations from '@/components/TypeRelations/TypeRelations'
 import BaseStats from '@/components/BaseStats/BaseStats'
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner'
+import PokemonActions from '@/components/PokemonActions/PokemonActions'
 
 import { calculateDamageMultipliers } from '@/utils/calculateDamageMultipliers'
 import { getBorderColors } from '@/utils/getBorderColors'
@@ -123,57 +124,17 @@ const Pokemon = memo(function Pokemon({
         <label className='font-bold'>#{index + 1} Pokémon</label>
 
         {pokemonData && (
-          <ul className='flex gap-2 items-center'>
-            <li
-              title={t('pokemon.shiny')}
-              onClick={() => {
-                // setShiny((previous) => {
-                //   const newShiny = !previous
-
-                //   if (newShiny) {
-                //     playAudio('/assets/audio/shiny.mp3', 0.2)
-                //   }
-
-                //   setTimeout(() => {
-                //     setHasAnimatedShiny(newShiny)
-                //   }, 1000)
-
-                //   return newShiny
-                // })
-                setShiny((previous) => !previous)
-              }}
-              className={`transition-colors duration-300 cursor-pointer hover:text-charizard ${
-                shiny && 'text-groudon'
-              }`}
-            >
-              ✦
-            </li>
-
-            <li className='w-[1px] h-3 bg-foreground opacity-10' />
-
-            <li
-              title={t('pokemon.cry')}
-              onClick={() =>
-                playAudio(
-                  pokemonData.cries.latest || pokemonData.cries.legacy,
-                  0.1,
-                )
-              }
-              className='transition-opacity duration-300 cursor-pointer hover:opacity-50 active:opacity-100'
-            >
-              🗣
-            </li>
-
-            <li className='w-[1px] h-3 bg-foreground opacity-10' />
-
-            <li
-              title={t('pokemon.clear')}
-              onClick={handleClear}
-              className='transition-opacity duration-300 cursor-pointer hover:opacity-50 active:opacity-100'
-            >
-              ↺
-            </li>
-          </ul>
+          <PokemonActions
+            shiny={shiny}
+            onShinyToggle={() => setShiny((previous) => !previous)}
+            onPlayCry={() =>
+              playAudio(
+                pokemonData.cries.latest || pokemonData.cries.legacy,
+                0.1,
+              )
+            }
+            onClear={handleClear}
+          />
         )}
       </div>
 
