@@ -16,7 +16,7 @@
 
 @theme {
   --animate-wiggle: wiggle 1s ease-in-out infinite;
-  --animate-soft-bounce: soft-bounce 1s ease-in-out infinite;
+  --animate-soft-bounce: soft-bounce 0.4s ease-in-out infinite;
 
   @keyframes wiggle {
     0%,
