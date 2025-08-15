@@ -32,7 +32,9 @@ const Pokemon = memo(function Pokemon({
   onUpdate,
 }: PokemonProps) {
   const [shiny, setShiny] = useState<boolean>(pokemon.shiny)
-  // const [hasAnimatedShiny, setHasAnimatedShiny] = useState<boolean>(false)
+  const [showShinyAnimation, setShowShinyAnimation] = useState<boolean>(false)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [pokemonData, setPokemonData] = useState<PokemonData | undefined>(
     pokemon.data,
   )
@@ -66,6 +68,17 @@ const Pokemon = memo(function Pokemon({
       }
     }
   }, [pokemonData, pokemonList])
+
+  // STOP ANIMATION WHEN SHINY IS DISABLED
+  useEffect(() => {
+    if (!shiny && showShinyAnimation) {
+      setShowShinyAnimation(false)
+      if (videoRef.current) {
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0.6
+      }
+    }
+  }, [shiny, showShinyAnimation])
 
   const audio = useRef<HTMLAudioElement>(new Audio())
 
@@ -140,7 +153,19 @@ const Pokemon = memo(function Pokemon({
         {pokemonData && (
           <PokemonActions
             shiny={shiny}
-            onShinyToggle={() => setShiny((previous) => !previous)}
+            onShinyToggle={() => {
+              setShiny((previous) => {
+                const newShiny = !previous
+                if (newShiny) {
+                  // ALWAYS SHOW ANIMATION WHEN ENABLING SHINY
+                  setShowShinyAnimation(true)
+                } else {
+                  // STOP ANIMATION WHEN DISABLING SHINY
+                  setShowShinyAnimation(false)
+                }
+                return newShiny
+              })
+            }}
             onPlayCry={() =>
               playAudio(
                 pokemonData.cries.latest || pokemonData.cries.legacy,
@@ -177,17 +202,6 @@ const Pokemon = memo(function Pokemon({
 
           <div className='flex gap-4 w-full'>
             <div className='relative basis-1/2'>
-              {/* <img
-                src={`/assets/gif/shiny.gif?t=${
-                  shiny && !hasAnimatedShiny ? Date.now() : undefined
-                }`}
-                alt='Shiny Sparkles'
-                className='absolute inset-0 z-10 pointer-events-none'
-                style={{
-                  display: shiny && !hasAnimatedShiny ? 'block' : 'none',
-                }}
-              /> */}
-
               <Image
                 src={
                   shiny
@@ -199,6 +213,75 @@ const Pokemon = memo(function Pokemon({
                 height={200}
                 className='relative z-0 group-hover:animate-soft-bounce'
               />
+
+              {/* SHINY SPARKLES WITH CANVAS CHROMA KEY */}
+              {showShinyAnimation && (
+                <>
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    className='hidden'
+                    onEnded={() => setShowShinyAnimation(false)}
+                    onLoadedData={() => {
+                      if (videoRef.current) {
+                        videoRef.current.volume = 0.3
+                        videoRef.current.currentTime = 0.6
+                      }
+                    }}
+                    onPlay={() => {
+                      const canvas = canvasRef.current
+                      const video = videoRef.current
+                      if (!canvas || !video) return
+
+                      const ctx = canvas.getContext('2d')
+                      if (!ctx) return
+
+                      const processFrame = () => {
+                        if (video.paused || video.ended) return
+
+                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height)
+                        const imageData = ctx.getImageData(
+                          0,
+                          0,
+                          canvas.width,
+                          canvas.height,
+                        )
+                        const data = imageData.data
+
+                        // CHROMA KEY: REMOVE BLUE BACKGROUND
+                        for (let i = 0; i < data.length; i += 4) {
+                          const r = data[i]
+                          const g = data[i + 1]
+                          const b = data[i + 2]
+
+                          // DETECT BLUE PIXELS (ADJUST THRESHOLD AS NEEDED)
+                          if (b > 100 && b > r + 50 && b > g + 50) {
+                            data[i + 3] = 0 // MAKE TRANSPARENT
+                          }
+                        }
+
+                        ctx.putImageData(imageData, 0, 0)
+                        requestAnimationFrame(processFrame)
+                      }
+
+                      processFrame()
+                    }}
+                  >
+                    <source
+                      src='/assets/videos/shiny-sparkles.mp4'
+                      type='video/mp4'
+                    />
+                  </video>
+
+                  <canvas
+                    ref={canvasRef}
+                    width={1280}
+                    height={720}
+                    className='absolute inset-0 w-full h-full object-cover z-10 pointer-events-none'
+                  />
+                </>
+              )}
             </div>
 
             <BaseStats pokemonData={pokemonData} />
