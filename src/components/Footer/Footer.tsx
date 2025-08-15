@@ -24,11 +24,10 @@ export default function Footer() {
         {t('footer.issue')}
 
         <a
-          href='https://github.com/ffrenzy7/poke-team-builder/issues'
-          target='blank'
+          href='mailto:ultimatepokemonteambuilder@gmail.com'
           className='text-blastoise underline hover:text-rayquaza visited:text-gengar'
         >
-          GitHub Issues
+          ultimatepokemonteambuilder@gmail.com
         </a>
       </p>
 

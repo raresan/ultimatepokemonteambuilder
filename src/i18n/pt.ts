@@ -55,7 +55,7 @@ const portugueseDictionary = {
   },
   footer: {
     donate: 'Quer apoiar este projeto? ',
-    issue: 'Encontrou algum bug? ',
+    issue: 'Encontrou algum bug? Me mande um email: ',
     data: 'Dados de ',
     copyright: '© de Azuxo Studio',
     nintendo: 'Pokémon é © da Nintendo',
