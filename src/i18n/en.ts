@@ -41,12 +41,12 @@ const englishDictionary = {
     weaknessesTitle: 'Weaknesses / Resistances / Immunities:',
   },
   typeRelations: {
-    hasNoEffect: 'Has no effect (*0)',
-    mostlyIneffective: 'Mostly ineffective (*0.25)',
-    notVeryEffective: 'Not very effective (*0.5)',
-    effective: 'Effective (*1)',
-    superEffective: 'Super effective (*2)',
-    extremelyEffective: 'Extremely effective (*4)',
+    hasNoEffect: '✕ Has no effect',
+    mostlyIneffective: '▼ Mostly ineffective',
+    notVeryEffective: '△ Not very effective',
+    effective: '◯ Effective',
+    superEffective: '⊙ Super effective',
+    extremelyEffective: '★ Extremely effective',
   },
   shareButton: {
     share: 'Share your Team',

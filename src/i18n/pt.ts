@@ -41,12 +41,12 @@ const portugueseDictionary = {
     weaknessesTitle: 'Fraquezas / Resistências / Imunidades:',
   },
   typeRelations: {
-    hasNoEffect: 'Ineficaz (*0)',
-    mostlyIneffective: 'Praticamente ineficaz (*0.25)',
-    notVeryEffective: 'Pouco eficaz (*0.5)',
-    effective: 'Eficaz (*1)',
-    superEffective: 'Super eficaz (*2)',
-    extremelyEffective: 'Extremamente eficaz (*4)',
+    hasNoEffect: '✕ Ineficaz',
+    mostlyIneffective: '▼ Praticamente ineficaz',
+    notVeryEffective: '△ Pouco eficaz)',
+    effective: '◯ Eficaz',
+    superEffective: '⊙ Super eficaz',
+    extremelyEffective: '★ Extremamente eficaz',
   },
   shareButton: {
     share: 'Compartilhe seu Time',

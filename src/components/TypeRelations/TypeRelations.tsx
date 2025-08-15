@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import useTranslations from '@/hooks/useTranslations'
 
@@ -10,15 +11,33 @@ type TypeRelationsProps = {
 
 export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   const t = useTranslations()
+  const [activeTooltip, setActiveTooltip] = useState<string | null>(null)
+
+  // CLOSE TOOLTIP WHEN CLICKING OUTSIDE
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (activeTooltip && !window.matchMedia('(hover: hover)').matches) {
+        setActiveTooltip(null)
+      }
+    }
+
+    if (activeTooltip) {
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [activeTooltip])
 
   const getMultiplierInfo = (multiplier: number) => {
-    const data: Record<number, { icon: string; label: string }> = {
-      0: { icon: '✕', label: t('typeRelations.hasNoEffect') },
-      0.25: { icon: '▼', label: t('typeRelations.mostlyIneffective') },
-      0.5: { icon: '△', label: t('typeRelations.notVeryEffective') },
-      1: { icon: '◯', label: t('typeRelations.effective') },
-      2: { icon: '⊙', label: t('typeRelations.superEffective') },
-      4: { icon: '★', label: t('typeRelations.extremelyEffective') },
+    const data: Record<number, { value: string; label: string }> = {
+      0: { value: '-', label: t('typeRelations.hasNoEffect') },
+      0.25: { value: '÷4', label: t('typeRelations.mostlyIneffective') },
+      0.5: { value: '÷2', label: t('typeRelations.notVeryEffective') },
+      1: { value: 'x1', label: t('typeRelations.effective') },
+      2: { value: 'x2', label: t('typeRelations.superEffective') },
+      4: { value: 'x4', label: t('typeRelations.extremelyEffective') },
     }
 
     if (
@@ -26,7 +45,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
       isNaN(multiplier) ||
       !data.hasOwnProperty(multiplier)
     ) {
-      return { icon: '?', label: 'Invalid data' }
+      return { value: '?', label: 'Invalid data' }
     }
 
     return data[multiplier]
@@ -38,32 +57,64 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
         isPokemon ? 'grid-cols-3' : 'grid-cols-3 md:grid-cols-6 xl:grid-cols-9'
       }`}
     >
-      {Object.entries(data).map(([type, value]) => (
-        <div
-          key={type}
-          className='flex items-center bg-darkrai gap-1.5 rounded-full pr-2 hover:scale-110 transition-transform ease-out duration-300 will-change-transform md:(gap-2 pr-3)'
-          title={isPokemon ? getMultiplierInfo(value).label : undefined}
-        >
-          <div className='relative shrink-0'>
-            <Image
-              src={`/assets/images/${type}.png`}
-              alt={type}
-              width={80}
-              height={16}
-            />
-          </div>
+      {Object.entries(data).map(([type, value]) => {
+        const tooltipKey = `${type}-${value}`
+        const isTooltipActive = activeTooltip === tooltipKey
 
-          {isPokemon ? (
-            <span className='grow-1 text-center text-[0.6rem] md:text-[0.7rem] select-none'>
-              {getMultiplierInfo(value).icon}
-            </span>
-          ) : (
-            <span className='grow-1 text-center text-[0.7rem] select-none'>
-              {value}
-            </span>
-          )}
-        </div>
-      ))}
+        return (
+          <div
+            key={type}
+            className='relative flex items-center bg-darkrai gap-1.5 rounded-full pr-2 hover:scale-110 transition-transform ease-out duration-300 will-change-transform md:(gap-2 pr-3)'
+            onMouseEnter={() => {
+              if (isPokemon && window.matchMedia('(hover: hover)').matches) {
+                setActiveTooltip(tooltipKey)
+              }
+            }}
+            onMouseLeave={() => {
+              if (isPokemon && window.matchMedia('(hover: hover)').matches) {
+                setActiveTooltip(null)
+              }
+            }}
+            onClick={(e) => {
+              if (isPokemon) {
+                e.stopPropagation() // PREVENT CLOSING WHEN CLICKING ON ELEMENT
+                // ON MOBILE, ALWAYS TOGGLE. ON DESKTOP, ONLY IF NO HOVER
+                if (!window.matchMedia('(hover: hover)').matches) {
+                  setActiveTooltip(isTooltipActive ? null : tooltipKey)
+                }
+              }
+            }}
+          >
+            <div className='relative shrink-0'>
+              <Image
+                src={`/assets/images/${type}.png`}
+                alt={type}
+                width={80}
+                height={16}
+                // className='w-auto h-auto'
+              />
+            </div>
+
+            {isPokemon ? (
+              <span className='grow-1 text-center text-[0.6rem] md:text-[0.7rem] select-none'>
+                {getMultiplierInfo(value).value}
+              </span>
+            ) : (
+              <span className='grow-1 text-center text-[0.7rem] select-none'>
+                {value}
+              </span>
+            )}
+
+            {/* CUSTOM TOOLTIP */}
+            {isPokemon && isTooltipActive && (
+              <div className='absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-foreground text-zekrom text-xs font-medium rounded-lg shadow-xl border-2 border-gray-300 whitespace-nowrap z-20'>
+                {getMultiplierInfo(value).label}
+                <div className='absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-foreground'></div>
+              </div>
+            )}
+          </div>
+        )
+      })}
     </div>
   )
 }
