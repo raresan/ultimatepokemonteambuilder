@@ -18,12 +18,12 @@ const PokemonActions = memo(function PokemonActions({
   const t = useTranslations()
 
   return (
-    <ul className='flex gap-2 items-center'>
+    <ul className='flex gap-2 items-center select-none'>
       <li
         title={t('pokemon.shiny')}
         onClick={onShinyToggle}
-        className={`transition-colors duration-300 cursor-pointer hover:hover:text-charizard ${
-          shiny && 'text-red-400'
+        className={`transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100 ${
+          shiny && 'opacity-100'
         }`}
       >
         ✦
@@ -34,7 +34,7 @@ const PokemonActions = memo(function PokemonActions({
       <li
         title={t('pokemon.cry')}
         onClick={onPlayCry}
-        className='transition-opacity duration-300 cursor-pointer hover:hover:opacity-50 active:opacity-100'
+        className='transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100'
       >
         🗣
       </li>
@@ -44,7 +44,7 @@ const PokemonActions = memo(function PokemonActions({
       <li
         title={t('pokemon.clear')}
         onClick={onClear}
-        className='transition-opacity duration-300 cursor-pointer hover:hover:opacity-50 active:opacity-100'
+        className='transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100'
       >
         ↺
       </li>

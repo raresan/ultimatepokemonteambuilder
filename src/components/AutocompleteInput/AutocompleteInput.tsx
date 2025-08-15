@@ -169,7 +169,7 @@ const AutocompleteInput = memo(function AutocompleteInput({
           type='button'
           onClick={handleVoiceSearch}
           className={`h-full aspect-square p-2 transition-opacity duration-300 focus:outline-none absolute top-0 right-0 cursor-pointer ${
-            !listening && 'opacity-50 hover:opacity-100'
+            !listening && 'opacity-50 hover:hover:opacity-100'
           }`}
         >
           {listening ? (
