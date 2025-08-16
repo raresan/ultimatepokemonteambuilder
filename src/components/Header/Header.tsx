@@ -27,10 +27,7 @@ export default function Header() {
         style={{ width: 'auto', height: 'auto' }}
       />
 
-      <h1 className='text-3xl font-bold'>
-        {t('teamBuilder.title')}{' '}
-        <span className='text-red-400'>(Beta v1.0)</span>
-      </h1>
+      <h1 className='text-3xl font-bold'>{t('teamBuilder.title')} </h1>
 
       <div className='text-center'>
         <p>{t('teamBuilder.description')}</p>

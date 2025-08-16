@@ -22,8 +22,8 @@ const PokemonActions = memo(function PokemonActions({
       <li
         title={t('pokemon.shiny')}
         onClick={onShinyToggle}
-        className={`transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100 ${
-          shiny && 'opacity-100'
+        className={`transition-opacity duration-300 cursor-pointer hover:hover:opacity-100 ${
+          shiny ? 'opacity-100' : 'opacity-50'
         }`}
       >
         ✦
