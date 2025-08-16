@@ -19,7 +19,22 @@ export default function ShinySparkles({
   ) => {
     if (video.paused || video.ended) return
 
-    context.drawImage(video, 0, 0, canvas.width, canvas.height)
+    // CROP SMALLER CENTER AREA TO MAKE SPARKLES BIGGER
+    const cropSize = 500 // SMALLER CROP = BIGGER SPARKLES
+    const cropX = (1280 - cropSize) / 2 // CENTER HORIZONTALLY
+    const cropY = (720 - cropSize) / 2 // CENTER VERTICALLY
+
+    context.drawImage(
+      video,
+      cropX,
+      cropY,
+      cropSize,
+      cropSize, // SOURCE: SMALLER CENTER AREA
+      0,
+      0,
+      canvas.width,
+      canvas.height, // DESTINATION: FULL CANVAS
+    )
 
     const imageData = context.getImageData(0, 0, canvas.width, canvas.height)
     const data = imageData.data
@@ -87,8 +102,8 @@ export default function ShinySparkles({
 
       <canvas
         ref={canvasRef}
-        width={1280}
-        height={720}
+        width={200}
+        height={200}
         className='absolute inset-0 w-full h-full object-cover z-10 pointer-events-none'
       />
     </>
