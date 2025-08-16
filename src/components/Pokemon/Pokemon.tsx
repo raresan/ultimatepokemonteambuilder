@@ -164,7 +164,7 @@ const Pokemon = memo(function Pokemon({
             onPlayCry={() =>
               playAudio(
                 pokemonData.cries.latest || pokemonData.cries.legacy,
-                0.03,
+                0.05,
               )
             }
             onClear={handleClear}
@@ -235,7 +235,7 @@ const Pokemon = memo(function Pokemon({
             alt={'Pokéball'}
             width={100}
             height={100}
-            className='grayscale select-none animate-wiggle origin-bottom'
+            className='grayscale select-none animate-wiggle origin-bottom object-cover'
             draggable='false'
           />
         </div>
