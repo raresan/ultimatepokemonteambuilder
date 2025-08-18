@@ -187,10 +187,10 @@ const Pokemon = memo(function Pokemon({
             {pokemonData.types.map((type) => (
               <Image
                 key={type.name}
-                src={`/assets/images/${type.name}.png`}
+                src={`/assets/svg/${type.name}.svg`}
                 alt={type.name}
-                width={100}
-                height={20}
+                width={30}
+                height={30}
                 className='select-none'
               />
             ))}
@@ -218,7 +218,7 @@ const Pokemon = memo(function Pokemon({
             <BaseStats pokemonData={pokemonData} />
           </div>
 
-          <div className='mt-6 w-full max-w-sm'>
+          <div className='mt-6 w-full max-w-2xl'>
             <h3 className='font-bold mb-2'>{t('pokemon.weaknessesTitle')}</h3>
 
             <TypeRelations

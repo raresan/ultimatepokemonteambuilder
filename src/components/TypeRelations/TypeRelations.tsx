@@ -53,8 +53,8 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
 
   return (
     <div
-      className={`grid gap-2 mx-auto  ${
-        isPokemon ? 'grid-cols-3' : 'grid-cols-3 md:grid-cols-6 xl:grid-cols-9'
+      className={`grid gap-x-2 gap-y-4 grid-cols-9 ${
+        isPokemon ? 'sm:grid-cols-18 lg:grid-cols-9' : 'md:grid-cols-18'
       }`}
     >
       {Object.entries(data).map(([type, value]) => {
@@ -64,7 +64,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
         return (
           <div
             key={type}
-            className='relative flex items-center bg-darkrai gap-1.5 rounded-full pr-2 hover:scale-110 transition-transform ease-out duration-300 will-change-transform md:(gap-2 pr-3)'
+            className='relative flex flex-col items-center hover:scale-110 transition-transform ease-out duration-300 will-change-transform'
             onMouseEnter={() => {
               if (isPokemon && window.matchMedia('(hover: hover)').matches) {
                 setActiveTooltip(tooltipKey)
@@ -85,25 +85,27 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
               }
             }}
           >
-            <div className='relative shrink-0'>
-              <Image
-                src={`/assets/images/${type}.png`}
-                alt={type}
-                width={80}
-                height={16}
-                className='select-none'
-              />
-            </div>
+            <div className='bg-darkrai rounded-full'>
+              <div className='relative shrink-0'>
+                <Image
+                  src={`/assets/svg/${type}.svg`}
+                  alt={type}
+                  width={30}
+                  height={30}
+                  className='select-none'
+                />
+              </div>
 
-            {isPokemon ? (
-              <span className='grow-1 text-center text-[0.6rem] md:text-[0.7rem] select-none'>
-                {getMultiplierInfo(value).value}
-              </span>
-            ) : (
-              <span className='grow-1 text-center text-[0.7rem] select-none'>
-                {value}
-              </span>
-            )}
+              {isPokemon ? (
+                <span className='grow-1 text-center text-2 select-none block pt-1 pb-2 w-full'>
+                  {getMultiplierInfo(value).value}
+                </span>
+              ) : (
+                <span className='grow-1 text-center text-2 select-none block pt-1 pb-2 w-full'>
+                  {value}
+                </span>
+              )}
+            </div>
 
             {/* CUSTOM TOOLTIP */}
             {isPokemon && isTooltipActive && (
