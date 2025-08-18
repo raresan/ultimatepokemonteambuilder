@@ -196,7 +196,7 @@ const Pokemon = memo(function Pokemon({
             ))}
           </div>
 
-          <div className='flex gap-4 w-full'>
+          <div className='flex justify-center gap-4 w-full'>
             <div className='aspect-square relative basis-1/2'>
               <Image
                 src={
