@@ -24,7 +24,7 @@ const BaseStats = memo(function BaseStats({ pokemonData }: BaseStatsProps) {
   const baseStatTotal = useRef<number>(0)
 
   return (
-    <div className='flex flex-col justify-center basis-1/2 gap-2 max-w-60'>
+    <div className='flex shrink-0 flex-col justify-center basis-1/2 gap-2 max-w-60'>
       <h3 className='font-bold'>{t('pokemon.baseStatsTitle')}</h3>
 
       {pokemonData.stats.map((stat, index) => {

@@ -197,9 +197,9 @@ const Pokemon = memo(function Pokemon({
       {error && <div className='p-4 text-red-500'>Error: {error}</div>}
 
       {pokemonData ? (
-        <div className='mt-4 flex flex-col grow-1 items-center justify-between'>
+        <div className='mt-4 flex flex-col grow-1 items-center justify-evenly'>
           <div className='flex justify-center gap-2 w-full'>
-            <div className='aspect-square relative basis-1/2'>
+            <div className='relative basis-1/2 h-full'>
               <Image
                 src={
                   shiny
@@ -208,7 +208,7 @@ const Pokemon = memo(function Pokemon({
                 }
                 alt={pokemonData.name}
                 fill
-                className='relative z-0 group-hover:animate-soft-bounce select-none'
+                className='relative z-0 group-hover:animate-soft-bounce select-none object-contain object-center'
               />
 
               <ShinySparkles
