@@ -156,7 +156,7 @@ const AutocompleteInput = memo(function AutocompleteInput({
 
   return (
     <div className='relative'>
-      <div className='flex items-center h-10 my-2 relative'>
+      <div className='flex items-center h-10 my-4 relative'>
         <input
           type='text'
           value={value}

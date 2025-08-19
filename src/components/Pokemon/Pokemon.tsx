@@ -142,7 +142,7 @@ const Pokemon = memo(function Pokemon({
     >
       <LoadingSpinner visible={loading} />
 
-      <div className='flex justify-between'>
+      <div className='h-5 flex items-center justify-between'>
         <label className='font-bold'>#{index + 1} Pokémon</label>
 
         {pokemonData && (
