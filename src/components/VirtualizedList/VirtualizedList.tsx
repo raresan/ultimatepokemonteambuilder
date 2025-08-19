@@ -51,10 +51,12 @@ export default function VirtualizedList({
             alt={suggestion.name}
             width={80}
             height={80}
+            draggable={false}
             unoptimized
             loading='lazy'
             onLoad={() => imageCache.set(suggestion.imgUrl, true)}
             onError={() => handleImageError(suggestion.imgUrl)}
+            className='select-none'
           />
           <span>{suggestion.formattedName}</span>
         </li>

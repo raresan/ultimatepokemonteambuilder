@@ -154,6 +154,7 @@ const Pokemon = memo(function Pokemon({
                 alt={type.name}
                 width={20}
                 height={20}
+                draggable={false}
                 className='select-none'
               />
             ))}
@@ -207,6 +208,7 @@ const Pokemon = memo(function Pokemon({
                     : pokemonData.sprites.other.home.front_default
                 }
                 alt={pokemonData.name}
+                draggable={false}
                 fill
                 className='relative z-0 group-hover:animate-soft-bounce select-none object-contain object-center'
               />
@@ -236,8 +238,8 @@ const Pokemon = memo(function Pokemon({
             alt={'Pokéball'}
             width={100}
             height={100}
+            draggable={false}
             className='grayscale select-none animate-wiggle origin-bottom object-cover'
-            draggable='false'
           />
         </div>
       )}

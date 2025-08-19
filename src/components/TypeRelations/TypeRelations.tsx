@@ -92,6 +92,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
                   alt={type}
                   width={30}
                   height={30}
+                  draggable={false}
                   className='select-none'
                 />
               </div>
