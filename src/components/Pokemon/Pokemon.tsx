@@ -137,13 +137,28 @@ const Pokemon = memo(function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group min-h-140 flex flex-col'
+      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 overflow-hidden group min-h-130 flex flex-col'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       <LoadingSpinner visible={loading} />
 
       <div className='h-5 flex items-center justify-between'>
-        <label className='font-bold'>#{index + 1} Pokémon</label>
+        <div className='flex gap-2'>
+          <label className='font-bold'>#{index + 1} Pokémon</label>
+
+          <div className='flex gap-2'>
+            {pokemonData?.types.map((type) => (
+              <Image
+                key={type.name}
+                src={`/assets/svg/${type.name}.svg`}
+                alt={type.name}
+                width={20}
+                height={20}
+                className='select-none'
+              />
+            ))}
+          </div>
+        </div>
 
         {pokemonData && (
           <PokemonActions
@@ -183,19 +198,6 @@ const Pokemon = memo(function Pokemon({
 
       {pokemonData ? (
         <div className='mt-4 flex flex-col grow-1 items-center justify-between'>
-          <div className='flex gap-2 mb-2'>
-            {pokemonData.types.map((type) => (
-              <Image
-                key={type.name}
-                src={`/assets/svg/${type.name}.svg`}
-                alt={type.name}
-                width={30}
-                height={30}
-                className='select-none'
-              />
-            ))}
-          </div>
-
           <div className='flex justify-center gap-2 w-full'>
             <div className='aspect-square relative basis-1/2'>
               <Image
@@ -218,7 +220,7 @@ const Pokemon = memo(function Pokemon({
             <BaseStats pokemonData={pokemonData} />
           </div>
 
-          <div className='mt-6 w-full max-w-2xl'>
+          <div className='mt-4 w-full max-w-2xl'>
             <h3 className='font-bold mb-2'>{t('pokemon.weaknessesTitle')}</h3>
 
             <TypeRelations
