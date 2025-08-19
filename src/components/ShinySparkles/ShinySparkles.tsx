@@ -104,7 +104,7 @@ export default function ShinySparkles({
         ref={canvasRef}
         width={500}
         height={500}
-        className='absolute inset-0 w-full h-full object-cover z-10 pointer-events-none'
+        className='absolute inset-0 w-full h-full object-contain z-10 pointer-events-none'
       />
     </>
   )

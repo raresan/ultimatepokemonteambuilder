@@ -16,7 +16,7 @@ export default function TeamWeaknesses({ team }: TeamWeaknessesProps) {
   const t = useTranslations()
 
   return (
-    <section className='mt-12 w-full max-w-7xl'>
+    <section className='text-center mt-12 max-w-7xl'>
       <h2 className='text-2xl font-bold mb-4'>
         {t('teamBuilder.teamWeaknessesTitle')}
       </h2>

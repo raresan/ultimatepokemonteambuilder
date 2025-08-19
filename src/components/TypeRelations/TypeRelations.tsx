@@ -54,7 +54,7 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
   return (
     <div
       className={`grid gap-x-2 gap-y-4 grid-cols-9 ${
-        isPokemon ? 'sm:grid-cols-18 lg:grid-cols-9' : 'md:grid-cols-18'
+        !isPokemon && 'sm:grid-cols-18'
       }`}
     >
       {Object.entries(data).map(([type, value]) => {
