@@ -33,7 +33,7 @@ export const parseQueryParams = async (
           shiny: shinyString === '1',
         } as PokemonTeamMember
       } catch (error) {
-        console.error(`Erro ao buscar ${name}:`, error)
+        console.error(`Failed to load ${name}:`, error)
       }
     }
 

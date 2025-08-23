@@ -37,7 +37,7 @@ export default function TeamBuilder() {
         setPokemonList(allPokemonUpdated)
       } catch (error: unknown) {
         setError(
-          error instanceof Error ? error.message : 'Error loading Pokémon',
+          error instanceof Error ? error.message : 'Failed to get Pokémon list',
         )
       } finally {
         setLoading(false)
@@ -60,7 +60,7 @@ export default function TeamBuilder() {
         setError(
           error instanceof Error
             ? error.message
-            : 'Error loading team from URL',
+            : 'Failed to load Pokémon Team from URL',
         )
       } finally {
         setInitialLoadDone(true)
@@ -99,8 +99,10 @@ export default function TeamBuilder() {
     [],
   )
 
-  // if (loading) return <div className='p-4'>Loading...</div>
-  if (error) return <div className='p-4 text-red-500'>Error: {error}</div>
+  if (error)
+    return (
+      <div className='flex justify-center p-4 text-red-400'>Error: {error}</div>
+    )
 
   return (
     <main className='min-h-screen flex flex-col items-center px-4 md:px-8'>

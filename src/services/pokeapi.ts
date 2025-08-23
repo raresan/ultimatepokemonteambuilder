@@ -17,7 +17,7 @@ export async function getAllPokemon() {
     const response = await fetch(`${BASE_URL}/pokemon?limit=999999&offset=0`)
 
     if (!response.ok) {
-      throw new Error('Error fetching all Pokémon')
+      throw new Error('Failed to get Pokémon list')
     }
 
     const data = await response.json()
@@ -40,7 +40,7 @@ export async function getTypeDamageRelations(type: string) {
   try {
     const response = await fetch(`${BASE_URL}/type/${type.toLowerCase()}`)
 
-    if (!response.ok) throw new Error('Error fetching type data')
+    if (!response.ok) throw new Error('Failed to get Pokémon Type data')
 
     const data = await response.json()
 
@@ -62,7 +62,7 @@ export async function getPokemon(name: string): Promise<PokemonData> {
   try {
     const response = await fetch(`${BASE_URL}/pokemon/${name.toLowerCase()}`)
 
-    if (!response.ok) throw new Error('Error fetching Pokémon data')
+    if (!response.ok) throw new Error('Failed to get Pokémon data')
 
     const data = await response.json()
 

@@ -88,7 +88,9 @@ const Pokemon = memo(function Pokemon({
       const pokemon = await getPokemon(name)
       return pokemon
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : 'Unknown error')
+      setError(
+        error instanceof Error ? error.message : 'Failed to get Pokémon data',
+      )
     }
   }
 
@@ -116,7 +118,9 @@ const Pokemon = memo(function Pokemon({
           }
         } catch (error: unknown) {
           setError(
-            error instanceof Error ? error.message : 'Error fetching Pokémon',
+            error instanceof Error
+              ? error.message
+              : 'Failed to get Pokémon data',
           )
         } finally {
           setLoading(false)
@@ -195,7 +199,7 @@ const Pokemon = memo(function Pokemon({
         onClickName={onClickName}
       />
 
-      {error && <div className='p-4 text-red-500'>Error: {error}</div>}
+      {error && <div className='p-4 text-red-400'>Error: {error}</div>}
 
       {pokemonData ? (
         <div className='mt-4 flex flex-col grow-1 items-center justify-evenly'>
