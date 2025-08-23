@@ -51,7 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     authors: [
       {
         name: creator,
-        url: 'https://renan-alonso-portfolio.vercel.app/index.html',
+        url: 'https://raresan.vercel.app/index.html',
       },
     ],
     creator,
@@ -64,7 +64,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: dictionary.metadata.websiteName,
       images: [
         {
-          url: new URL(dictionary.metadata.shareImage, dictionary.metadata.websiteUrl).toString(),
+          url: new URL(
+            dictionary.metadata.shareImage,
+            dictionary.metadata.websiteUrl,
+          ).toString(),
           width: 1200,
           height: 630,
           alt: dictionary.metadata.shareImageAlt,
@@ -77,7 +80,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: dictionary.metadata.title,
       description: dictionary.metadata.description,
-      images: new URL(dictionary.metadata.shareImage, dictionary.metadata.websiteUrl).toString(),
+      images: new URL(
+        dictionary.metadata.shareImage,
+        dictionary.metadata.websiteUrl,
+      ).toString(),
       creator,
     },
     robots: {

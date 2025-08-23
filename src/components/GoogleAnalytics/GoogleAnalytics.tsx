@@ -16,7 +16,7 @@ export default function GoogleAnalytics() {
     }
   }, [pathname, searchParams])
 
-  if (!GA_TRACKING_ID || process.env.NODE_ENV !== 'production') return null
+  // if (!GA_TRACKING_ID || process.env.NODE_ENV !== 'production') return null
 
   return (
     <>
