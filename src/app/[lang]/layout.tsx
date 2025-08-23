@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 
 import en from '@/i18n/en'
 import pt from '@/i18n/pt'
+import GoogleAnalytics from '@/components/GoogleAnalytics/GoogleAnalytics'
 
 import '@/app/globals.css'
 
@@ -107,7 +108,10 @@ export default async function LangLayout({
 
   return (
     <html lang={lang} className={`${saira.variable} font-saira`}>
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   )
 }
