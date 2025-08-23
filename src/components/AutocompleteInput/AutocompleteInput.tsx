@@ -160,7 +160,7 @@ const AutocompleteInput = memo(function AutocompleteInput({
         <input
           type='text'
           value={value}
-          onChange={(e) => onTypeName(e.target.value)}
+          onChange={(event) => onTypeName(event.target.value)}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setShowSuggestions(false)}
           className='w-full h-full bg-background rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-foreground'
@@ -188,7 +188,7 @@ const AutocompleteInput = memo(function AutocompleteInput({
         <ul
           ref={listRef}
           className='absolute z-10 bg-background border border-darkrai rounded w-full max-h-80 overflow-y-auto'
-          onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
+          onScroll={(event) => setScrollTop(event.currentTarget.scrollTop)}
         >
           <VirtualizedList
             items={suggestionsWithImages}

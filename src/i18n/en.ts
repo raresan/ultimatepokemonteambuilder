@@ -50,7 +50,7 @@ const englishDictionary = {
   },
   shareButton: {
     share: 'Share your Team',
-    copied: 'Copied to your clipboard!',
+    copied: 'Copied!',
     error: 'Error while copying!',
   },
   footer: {

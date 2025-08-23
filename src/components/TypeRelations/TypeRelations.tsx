@@ -79,9 +79,9 @@ export default function TypeRelations({ data, isPokemon }: TypeRelationsProps) {
                 setActiveTooltip(null)
               }
             }}
-            onClick={(e) => {
+            onClick={(event) => {
               if (isPokemon) {
-                e.stopPropagation() // PREVENT CLOSING WHEN CLICKING ON ELEMENT
+                event.stopPropagation() // PREVENT CLOSING WHEN CLICKING ON ELEMENT
                 // ON MOBILE, ALWAYS TOGGLE. ON DESKTOP, ONLY IF NO HOVER
                 if (!window.matchMedia('(hover: hover)').matches) {
                   setActiveTooltip(isTooltipActive ? null : tooltipKey)
