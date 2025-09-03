@@ -141,7 +141,7 @@ const Pokemon = memo(function Pokemon({
   return (
     <div
       key={index}
-      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-shadow duration-300 group min-h-130 flex flex-col'
+      className='relative rounded-lg p-3 md:p-4 border-3 bg-zekrom border-darkrai shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:shadow-[0_0_20px_rgba(0,0,0,0.8)] hover:z-10 transition-shadow duration-300 group min-h-130 flex flex-col'
       style={pokemonData ? getBorderColors(pokemonData.types) : undefined}
     >
       <LoadingSpinner visible={loading} />
@@ -214,7 +214,7 @@ const Pokemon = memo(function Pokemon({
                 alt={pokemonData.name}
                 draggable={false}
                 fill
-                className='relative z-0 group-hover:animate-soft-bounce select-none object-contain object-center'
+                className='relative group-hover:animate-soft-bounce select-none object-contain object-center'
               />
 
               <ShinySparkles

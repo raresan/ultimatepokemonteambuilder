@@ -28,8 +28,8 @@ const PokemonActions = memo(function PokemonActions({
         onClick={onShinyToggle}
         className={`h-full transition-opacity duration-300 cursor-pointer  ${
           shiny
-            ? 'text-red-400 opacity-100 hover:hover:opacity-50'
-            : 'opacity-50 hover:hover:opacity-100'
+            ? 'text-red-400 opacity-100 hover:opacity-50'
+            : 'opacity-50 hover:opacity-100'
         }`}
       >
         <ShinyIcon className='h-full' />
@@ -40,7 +40,7 @@ const PokemonActions = memo(function PokemonActions({
       <li
         title={t('pokemon.cry')}
         onClick={onPlayCry}
-        className='h-full transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100'
+        className='h-full transition-opacity opacity-50 duration-300 cursor-pointer hover:opacity-100'
       >
         <CryIcon className='h-full p-[1px]' />
       </li>
@@ -50,7 +50,7 @@ const PokemonActions = memo(function PokemonActions({
       <li
         title={t('pokemon.clear')}
         onClick={onClear}
-        className='h-full transition-opacity opacity-50 duration-300 cursor-pointer hover:hover:opacity-100'
+        className='h-full transition-opacity opacity-50 duration-300 cursor-pointer hover:opacity-100'
       >
         <ClearIcon className='h-full p-[2px]' />
       </li>
