@@ -1,13 +1,13 @@
 # Third-Party Licenses
 
-This project privately uses SVG Pokémon type icons and public Pokémon data from the following sources:
+This project uses SVG Pokémon type icons and public Pokémon data from the following sources:
 
 ---
 
 ## Icon Source
 
 **Repository:** [partywhale/pokemon-type-icons](https://github.com/partywhale/pokemon-type-icons)  
-**License:** MIT License (2022) — Free to use under MIT license  
+**License:** MIT License (2022) — Free to use under MIT license
 
 ```
 MIT License
@@ -37,10 +37,10 @@ SOFTWARE.
 
 ## Public API Usage
 
-This project makes use of the [PokéAPI](https://pokeapi.co/), a free and open RESTful API for Pokémon data.  
+This project makes use of the [PokéAPI](https://pokeapi.co/), a free and open RESTful API for Pokémon data.
 
 **PokéAPI License:**  
 PokéAPI is released under the [Creative Commons CC0 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0/),  
-which allows free use of its data without restrictions.  
+which allows free use of its data without restrictions.
 
 We acknowledge and give credit to the PokéAPI team and contributors for providing this resource.
